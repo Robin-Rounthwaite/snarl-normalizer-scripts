@@ -62,3 +62,18 @@ for id in unnorm_reads_mapq_pos:
         print("\t" + str(mapq_position[0]) + "\t" + str(mapq_position[1]))
     
 # %%
+print("unnorm reads")
+for read in unnorm_full_reads["CL100076190L1C003R006_439316/2"]:
+    parsed = read.split("\t")
+    print()
+    print(len(parsed[9]))
+
+print()
+print("norm reads")
+for read in norm_full_reads["CL100076190L1C003R006_439316/2"]:
+    parsed = read.split("\t")
+    print()
+
+    print(len(parsed[9]))
+# %%
+

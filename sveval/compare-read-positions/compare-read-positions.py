@@ -18,13 +18,6 @@ norm_inf = "hg38-hsvlr_srdedup17_aug.chr6.normalized.mpmap-aln.chr6-surject.read
 unnorm = open(unnorm_inf, "r")
 norm = open(norm_inf, "r")
 
-################################
-#variant 2 of chr6 mpmap results:
-# from 469233 to 469660
-# cluster missing with reads >45 mapq >469200, <469300.
-# in that cluster, we have reads moving from 469250s to 469680s. Also, a lot of the secondaries drop. See
-# /home/robin/paten_lab/vg-team/vg/robin-scripts/sveval/compare-read-positions/chr6.mpmap-unpaired-end.variant-2.reads-from-469200-469300.follow-individual-read-comparisons.txt
-################################
 
 # experimental conditions & options
 minimum_chrom_pos = 469000
@@ -147,3 +140,23 @@ ax.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
 # # %%
 
 # %%
+################################
+#variant 2 of chr6 mpmap results:
+# from 469233 to 469660
+# cluster missing with reads >45 mapq >469200, <469300.
+# in that cluster, we have reads moving from 469250s to 469680s. Also, a lot of the secondaries drop. See
+# /home/robin/paten_lab/vg-team/vg/robin-scripts/sveval/compare-read-positions/chr6.mpmap-unpaired-end.variant-2.reads-from-469200-469300.follow-individual-read-comparisons.txt
+# It was made using:
+
+# unnorm_inf = "variant-2.DEL-469233-to-469660.data/hg38-hsvlr_srdedup17_aug.chr6.mpmap-aln.chr6-surject.reads-mapped-between-nodes-33589074-33588890-in-unnorm.sorted.sam"
+# norm_inf = "variant-2.DEL-469233-to-469660.data/hg38-hsvlr_srdedup17_aug.chr6.normalized.mpmap-aln.chr6-surject.reads-mapped-between-nodes-33589074-33588890-in-unnorm.sorted.sam"
+# unnorm = open(unnorm_inf, "r")
+# norm = open(norm_inf, "r")
+
+# experimental conditions & options
+# minimum_chrom_pos = 469000
+# maximum_chrom_pos = 470000
+# minimum_mapq = 2
+#
+
+################################
