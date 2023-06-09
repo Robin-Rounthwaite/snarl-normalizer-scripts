@@ -5,26 +5,35 @@
 cd /public/groups/vg/rrounthw/vg/ && . ./source_me.sh
 cd /public/groups/vg/rrounthw/jean-combined-sv-graph/chrom-mapping-experiment/
 
-VARIATION_TYPE=del
+VARIATION_TYPE=ins
 GRAPH=hg38-hsvlr_srdedup17_aug.chr6
-LENGTH=427
-POSITION_START=469200
-POSITION_END=470000
+LENGTH=86
+POSITION_START=515554
+POSITION_END=515794
 CONTEXT=10
 
 vg find -x ${GRAPH}.xg -c ${CONTEXT} -p chr6:${POSITION_START}-${POSITION_END} | vg view -dp - >${GRAPH}.${VARIATION_TYPE}-len-${LENGTH}.${POSITION_START}-${POSITION_END}.context-${CONTEXT}.dot
+
+GRAPH=hg38-hsvlr_srdedup17_aug.chr6.normalized
+vg find -x ${GRAPH}.xg -c ${CONTEXT} -p chr6:${POSITION_START}-${POSITION_END} | vg view -dp - >${GRAPH}.${VARIATION_TYPE}-len-${LENGTH}.${POSITION_START}-${POSITION_END}.context-${CONTEXT}.dot
+
+
 # vg find -x ${GRAPH}.xg -c 20 -p chr6:${POSITION_START}-${POSITION_END} | vg mod -Ou - | vg view -dp - >${GRAPH}.${VARIATION_TYPE}-len-${LENGTH}.${POSITION_START}-${POSITION_END}.context-${CONTEXT}.dot
 
 #Locally:
 cd ~/paten_lab/vg-team/vg/robin-scripts/sveval/view-sv/
 
-VARIATION_TYPE=del
+VARIATION_TYPE=ins
 GRAPH=hg38-hsvlr_srdedup17_aug.chr6
-LENGTH=427
-POSITION_START=469200
-POSITION_END=470000
+LENGTH=86
+POSITION_START=515554
+POSITION_END=515794
 CONTEXT=10
 
+scp rrounthw@courtyard.gi.ucsc.edu:/public/groups/vg/rrounthw/jean-combined-sv-graph/chrom-mapping-experiment/${GRAPH}.${VARIATION_TYPE}-len-${LENGTH}.${POSITION_START}-${POSITION_END}.context-${CONTEXT}.dot . && dot ${GRAPH}.${VARIATION_TYPE}-len-${LENGTH}.${POSITION_START}-${POSITION_END}.context-${CONTEXT}.dot -Tsvg -o ${GRAPH}.${VARIATION_TYPE}-len-${LENGTH}.${POSITION_START}-${POSITION_END}.context-${CONTEXT}.svg
+chromium-browser ${GRAPH}.${VARIATION_TYPE}-len-${LENGTH}.${POSITION_START}-${POSITION_END}.context-${CONTEXT}.svg &
+
+GRAPH=hg38-hsvlr_srdedup17_aug.chr6.normalized
 scp rrounthw@courtyard.gi.ucsc.edu:/public/groups/vg/rrounthw/jean-combined-sv-graph/chrom-mapping-experiment/${GRAPH}.${VARIATION_TYPE}-len-${LENGTH}.${POSITION_START}-${POSITION_END}.context-${CONTEXT}.dot . && dot ${GRAPH}.${VARIATION_TYPE}-len-${LENGTH}.${POSITION_START}-${POSITION_END}.context-${CONTEXT}.dot -Tsvg -o ${GRAPH}.${VARIATION_TYPE}-len-${LENGTH}.${POSITION_START}-${POSITION_END}.context-${CONTEXT}.svg
 chromium-browser ${GRAPH}.${VARIATION_TYPE}-len-${LENGTH}.${POSITION_START}-${POSITION_END}.context-${CONTEXT}.svg &
 

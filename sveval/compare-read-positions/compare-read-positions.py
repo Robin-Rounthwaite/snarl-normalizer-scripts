@@ -11,18 +11,48 @@ import matplotlib.pyplot as plt
 import numpy as np
 print("hello world")
 
-# %%
 
-unnorm_inf = "hg38-hsvlr_srdedup17_aug.chr6.mpmap-aln.chr6-surject.reads-mapped-between-nodes-33589074-33588890-in-unnorm.sorted.sam"
-norm_inf = "hg38-hsvlr_srdedup17_aug.chr6.normalized.mpmap-aln.chr6-surject.reads-mapped-between-nodes-33589074-33588890-in-unnorm.sorted.sam"
+# unnorm_inf = "hg38-hsvlr_srdedup17_aug.chr6.mpmap-aln.chr6-surject.reads-mapped-between-nodes-33589074-33588890-in-unnorm.sorted.sam"
+# norm_inf = "hg38-hsvlr_srdedup17_aug.chr6.normalized.mpmap-aln.chr6-surject.reads-mapped-between-nodes-33589074-33588890-in-unnorm.sorted.sam"
+# minimum_chrom_pos = 469000
+# maximum_chrom_pos = 470000
+
+# #variant 5
+#updated range for variant 5:
+# unnorm_inf = "variant-5.updated-range.INS-len-50.12167581-12167581.data/hg38-hsvlr_srdedup17_aug.chr6.mpmap-aln.sorted.variant-5.find-nodes-33960387-33960586.gam.reads-extracted-from-unnorm-surjected.sam"
+# norm_inf = "variant-5.updated-range.INS-len-50.12167581-12167581.data/hg38-hsvlr_srdedup17_aug.chr6.mpmap-aln.sorted.variant-5.find-nodes-33960387-33960586.gam.reads-extracted-from-norm-surjected.sam"
+# minimum_chrom_pos = 12167000
+# maximum_chrom_pos = 12168000
+# minimum_mapq = 1
+
+# #variant 4
+#updated range for variant 4:
+# unnorm_inf = "variant-4.updated-range.INS-len-62.7103348-7103348.data/hg38-hsvlr_srdedup17_aug.chr6.mpmap-aln.sorted.variant-4.find-nodes-33801461-33801630.gam.reads-extracted-from-unnorm-surjected.sam"
+# norm_inf = "variant-4.updated-range.INS-len-62.7103348-7103348.data/hg38-hsvlr_srdedup17_aug.chr6.mpmap-aln.sorted.variant-4.find-nodes-33801461-33801630.gam.reads-extracted-from-norm-surjected.sam"
+# minimum_chrom_pos = 7103200
+# maximum_chrom_pos = 7103500
+# minimum_mapq = 0
+
+#variant 3
+#updated range for variant 3, with the read names from unnorm:
+# unnorm_inf = "variant-3.updated-range.INS-515574-515659.data/hg38-hsvlr_srdedup17_aug.chr6.mpmap-aln.sorted.variant-3.find-nodes-33590398-33590415.gam.reads-extracted-from-unnorm-surjected.sam"
+# norm_inf = "variant-3.updated-range.INS-515574-515659.data/hg38-hsvlr_srdedup17_aug.chr6.mpmap-aln.sorted.variant-3.find-nodes-33590398-33590415.gam.reads-extracted-from-norm-surjected.sam"
+#updated range for variant 3, with the read names from norm:
+# unnorm_inf = "variant-3.updated-range.INS-515574-515659.data/hg38-hsvlr_srdedup17_aug.chr6.normalized.mpmap-aln.sorted.variant-3.find-nodes-33590398-33590415.gam.reads-extracted-from-unnorm-surjected.sam"
+# norm_inf = "variant-3.updated-range.INS-515574-515659.data/hg38-hsvlr_srdedup17_aug.chr6.normalized.mpmap-aln.sorted.variant-3.find-nodes-33590398-33590415.gam.reads-extracted-from-norm-surjected.sam"
+# minimum_chrom_pos = 515554
+# maximum_chrom_pos = 515794
+# minimum_mapq = 0
+
 unnorm = open(unnorm_inf, "r")
 norm = open(norm_inf, "r")
 
-
 # experimental conditions & options
-minimum_chrom_pos = 469000
-maximum_chrom_pos = 470000
-minimum_mapq = 2
+# minimum_chrom_pos = 0
+# maximum_chrom_pos = 92233720368547 #int larger than human genome
+minimum_chrom_pos = 12167000
+maximum_chrom_pos = 12168000
+minimum_mapq = 1
 
 #code:
 unnorm_mqs = list()
@@ -77,8 +107,8 @@ for line in norm:
 # print(unnorm_cropped_out_count)
 # print(norm_cropped_out_count)
 
-print(len(unnorm_pos), min(unnorm_pos), max(unnorm_pos))
-print(len(norm_pos), min(norm_pos), max(norm_pos))
+print("len(unnorm_pos)", len(unnorm_pos), "min(unnorm_pos), ", min(unnorm_pos), "max(unnorm_pos), ", max(unnorm_pos))
+print("len(norm_pos)", len(norm_pos), "min(norm_pos)", min(norm_pos), "max(norm_pos)", max(norm_pos))
 fig, ax = plt.subplots()
 cm = plt.cm.get_cmap('RdYlBu')
 ax.scatter(unnorm_pos, np.ones(len(unnorm_pos)), s=1, c=unnorm_mqs, vmin=0, vmax=60, cmap=cm)
@@ -96,7 +126,7 @@ y_low, y_high = ax.get_ylim()
 ax.set_aspect(abs((x_right-x_left)/(y_low-y_high))*ratio)
 plt.colorbar(sc)
 # plt.colorbar(sc, fraction=0.046, pad = 0.04)
-plt.title("Selected reads mapping start positions (mapq >" + str(minimum_mapq) + ")")
+plt.title("Selected reads mapping start positions (mapq >=" + str(minimum_mapq) + ")")
 plt.xlabel("position on chr6")
 y = [0,1]
 labels = ["normalized", "unnormalized"]
@@ -108,6 +138,9 @@ ax.spines['bottom'].set_visible(False)
 ax.spines['left'].set_visible(False)
 
 plt.show()
+#%%\
+
+print("hi")
 #%%
 # import numpy as np
 # # Create random data
