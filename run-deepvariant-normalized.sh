@@ -38,6 +38,7 @@ nice samtools sort --threads 20 hg38-hsvlr_srdedup17_aug.normalized.robin-giraff
 echo "done with sorting"
 nice samtools index hg38-hsvlr_srdedup17_aug.normalized.robin-giraffe-29k11w32N.sorted.bam > hg38-hsvlr_srdedup17_aug.normalized.robin-giraffe-29k11w32N.sorted.bam.bai
 echo "done with indexing"
+mkdir norm-logs
 NUM_SHARDS="20"
 BIN_VERSION="1.5.0"
 docker run \
@@ -48,8 +49,8 @@ docker run \
   --model_type="WGS" \
   --ref=/input/hg38.fa \
   --reads=/input/hg38-hsvlr_srdedup17_aug.normalized.robin-giraffe-29k11w32N.sorted.bam \
-  --output_vcf=/input/hg38-hsvlr_srdedup17_aug.normalized.robin-giraffe-29k11w32N.vcf \
-  --output_gvcf=/input/hg38-hsvlr_srdedup17_aug.normalized.robin-giraffe-29k11w32N.gvcf \
+  --output_vcf=/input/hg38-hsvlr_srdedup17_aug.normalized.robin-giraffe-29k11w32N.main.vcf \
+  --output_gvcf=/input/hg38-hsvlr_srdedup17_aug.normalized.robin-giraffe-29k11w32N.main.gvcf \
   --num_shards=${NUM_SHARDS} \
-  --logging_dir=/input/logs \
+  --logging_dir=/input/norm-logs \
   --dry_run=false
