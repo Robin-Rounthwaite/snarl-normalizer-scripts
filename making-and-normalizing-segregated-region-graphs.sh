@@ -164,7 +164,7 @@ nice time vg normalize --run_tests -d graph.dist -g graph.combined.n32.segregate
 
 #for when I'm running the chr21 locally:
 cd ~/paten_lab/vg-team/vg/ &&
-. ./source_me.sh && make -j 20 &&
+. ./source_me.sh && . ./source_me.sh && make -j 20 &&
 cd ~/paten_lab/vg-team/vg/robin-graphs/nygc-chr21-segregated-regions &&
 nice time vg normalize --run_tests -d graph.dist -g graph.combined.n32.segregated-regions.gbwt -r graph.combined.n32.segregated-regions.gbwt.gg -t 20 -n 32 -o graph.combined.n32.segregated-regions.normalized.gbwt -S graph.n32.segregated-regions-data.txt graph.combined.n32.segregated-regions.pg > graph.combined.n32.segregated-regions.normalized.pg
 
@@ -186,3 +186,11 @@ cd /private/groups/patenlab/rrounthw/nygc/chr21 &&
 echo "running normalize." &&
 nice time vg normalize --skip_desegregate --run_tests -d graph.dist -g graph.combined.n32.segregated-regions.gbwt -r graph.combined.n32.segregated-regions.gbwt.gg -t 20 -n 32 -S graph.combined.n32.segregated-regions-data.txt graph.combined.n32.segregated-regions.pg > graph.combined.n32.segregated-regions.normalized.3.pg 2> graph.combined.n32.segregated-regions.normalized.3.stderr &&
 echo "done"
+
+#12/13/2023
+#more local runs of chr21 segregated. This time just one snarl is normalized (hardcoded).
+cd ~/paten_lab/vg-team/vg/ &&
+. ./source_me.sh && . ./source_me.sh && make -j 20 &&
+cd ~/paten_lab/vg-team/vg/robin-graphs/nygc-chr21-segregated-regions &&
+nice time vg normalize --skip_desegregate --run_tests -d graph.dist -g graph.combined.n32.segregated-regions.gbwt -r graph.combined.n32.segregated-regions.gbwt.gg -t 20 -n 32 -o graph.combined.n32.segregated-regions.normalized-996832-997083.gbwt -S graph.n32.segregated-regions-data.txt graph.combined.n32.segregated-regions.pg > graph.combined.n32.segregated-regions.normalized-996832-997083.pg
+
