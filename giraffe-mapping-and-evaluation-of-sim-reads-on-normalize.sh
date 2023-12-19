@@ -1,24 +1,32 @@
-#!/bin/bash                                                                                                                                 set -e                                                                                                                                      #where we left off:                                                                                                                         echo "done with minimizer, simulating reads" &&                                                                                             vg sim --num-reads 1000000 --frag-len 500 --read-length 100 --random-seed 9999 --any-path --progress -x graph.pg --align-out >reads-sim-1m-from-graph-pg.gam &&
+#!/bin/bash
+set -e
 # #mustard: normalizing and giraffe mapping to chr21.
-# cd /private/groups/patenlab/rrounthw/vg &&
-# git pull &&
-# . ./source_me.sh && make -j 20 &&
-# cd /private/groups/patenlab/rrounthw/nygc/chr21 &&
+# cd /private/groups/patenlab/rrounthw/vg
+# git pull
+# . ./source_me.sh && make -j 20
+# cd /private/groups/patenlab/rrounthw/nygc/chr21
 # echo "running normalize." && #graph.combined.n32.segregated-regions.gbwt graph.combined.n32.desegregated-regions.gbwt
-# nice time vg normalize --run_tests -d graph.dist -g graph.combined.n32.segregated-regions.gbwt -r graph.combined.n32.segregated-regions.gbwt.gg -t 20 -n 32 -o graph.combined.n32.desegregated-regions.normalized.gbwt -S graph.combined.n32.segregated-regions-data.txt graph.combined.n32.segregated-regions.pg > graph.combined.n32.desegregated-regions.normalized.pg 2> graph.combined.n32.desegregated-regions.normalized.stderr &&
-# echo "done normalizing, making gbwt graph" &&
-# nice time vg gbwt -g graph.combined.n32.desegregated-regions.normalized.gbwt.gg -x graph.combined.n32.desegregated-regions.normalized.pg graph.combined.n32.desegregated-regions.normalized.gbwt &&
-# echo "done making gbwt graph, starting distance indexing" &&
-# nice time vg index -j graph.combined.n32.desegregated-regions.normalized.dist graph.combined.n32.desegregated-regions.normalized.pg &&
-# echo "done with index, starting minimizer file" &&
-# nice time vg minimizer -g graph.combined.n32.desegregated-regions.normalized.gbwt -d graph.combined.n32.desegregated-regions.normalized.dist -o graph.combined.n32.desegregated-regions.normalized.min graph.combined.n32.desegregated-regions.normalized.pg &&
+# nice time vg normalize --run_tests -d graph.dist -g graph.combined.n32.segregated-regions.gbwt -r graph.combined.n32.segregated-regions.gbwt.gg -t 20 -n 32 -o graph.combined.n32.desegregated-regions.normalized.gbwt -S graph.combined.n32.segregated-regions-data.txt graph.combined.n32.segregated-regions.pg > graph.combined.n32.desegregated-regions.normalized.pg 2> graph.combined.n32.desegregated-regions.normalized.stderr
+# echo "done normalizing, making gbwt graph"
+# nice time vg gbwt -g graph.combined.n32.desegregated-regions.normalized.gbwt.gg -x graph.combined.n32.desegregated-regions.normalized.pg graph.combined.n32.desegregated-regions.normalized.gbwt
+# echo "done making gbwt graph, starting distance indexing"
+# nice time vg index -j graph.combined.n32.desegregated-regions.normalized.dist graph.combined.n32.desegregated-regions.normalized.pg
+# echo "done with index, starting minimizer file"
+# nice time vg minimizer -g graph.combined.n32.desegregated-regions.normalized.gbwt -d graph.combined.n32.desegregated-regions.normalized.dist -o graph.combined.n32.desegregated-regions.normalized.min graph.combined.n32.desegregated-regions.normalized.pg
 
 #where we left off:
 echo "done with minimizer, simulating reads" &&
-echo "done with simulating reads, running vg giraffe" &&                                                                                    nice time vg giraffe  -m graph.combined.n32.desegregated-regions.normalized.min -d graph.combined.n32.desegregated-regions.normalized.dist -g graph.combined.n32.desegregated-regions.normalized.gbwt.gg -H graph.combined.n32.desegregated-regions.normalized.gbwt -G reads-sim-1m-from-graph-pg.gam -p -t 22 > graph.combined.n32.desegregated-regions.normalized.1m-giraffe-mapping.gam &&                                                                                                                                                                                   echo "running for unnormalized also..." &&                                                                                                  echo "making minimizer" &&                                                                                                                  nice time vg minimizer -g graph.combined.gbwt -d graph.dist -o graph.min graph.pg && &&
+vg sim --num-reads 1000000 --frag-len 500 --read-length 100 --random-seed 9999 --any-path --progress -x graph.pg --align-out >reads-sim-1m-from-graph-pg.gam &&
+echo "done with simulating reads, running vg giraffe" &&
+nice time vg giraffe  -m graph.combined.n32.desegregated-regions.normalized.min -d graph.combined.n32.desegregated-regions.normalized.dist -g graph.combined.n32.desegregated-regions.normalized.gbwt.gg -H graph.combined.n32.desegregated-regions.normalized.gbwt -G reads-sim-1m-from-graph-pg.gam -p -t 22 > graph.combined.n32.desegregated-regions.normalized.1m-giraffe-mapping.gam &&
+
+echo "running for unnormalized also..." &&
+echo "making minimizer" &&
+nice time vg minimizer -g graph.combined.gbwt -d graph.dist -o graph.min graph.pg &&
 echo "running unnormalized giraffe." &&
-nice time vg giraffe  -m graph.min -d graph.dist -g graph.combined.gbwt.gg -H graph.combined.gbwt -G reads-sim-1m-from-graph-pg.gam -p -t 22 > graph.1m-giraffe-mapping.gam && &&
-echo "done" &&                                                                                                                               
+nice time vg giraffe  -m graph.min -d graph.dist -g graph.combined.gbwt.gg -H graph.combined.gbwt -G reads-sim-1m-from-graph-pg.gam -p -t 22 > graph.1m-giraffe-mapping.gam &&
+echo "done" &&
+
 
 get_roc_stats () {
     echo "running get_roc_stats"
