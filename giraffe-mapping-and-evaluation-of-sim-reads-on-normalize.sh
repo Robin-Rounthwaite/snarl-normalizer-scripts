@@ -15,16 +15,16 @@ set -e
 # nice time vg minimizer -g graph.combined.n32.desegregated-regions.normalized.gbwt -d graph.combined.n32.desegregated-regions.normalized.dist -o graph.combined.n32.desegregated-regions.normalized.min graph.combined.n32.desegregated-regions.normalized.pg
 
 #where we left off:
-echo "done with minimizer, simulating reads" &&
-vg sim --num-reads 1000000 --frag-len 500 --read-length 100 --random-seed 9999 --any-path --progress -x graph.pg --align-out >reads-sim-1m-from-graph-pg.gam &&
+# echo "done with minimizer, simulating reads" &&
+# vg sim --num-reads 1000000 --frag-len 500 --read-length 100 --random-seed 9999 --any-path --progress -x graph.pg --align-out >reads-sim-1m-from-graph-pg.gam &&
 echo "done with simulating reads, running vg giraffe" &&
-nice time vg giraffe  -m graph.combined.n32.desegregated-regions.normalized.min -d graph.combined.n32.desegregated-regions.normalized.dist -g graph.combined.n32.desegregated-regions.normalized.gbwt.gg -H graph.combined.n32.desegregated-regions.normalized.gbwt -G reads-sim-1m-from-graph-pg.gam -p -t 22 > graph.combined.n32.desegregated-regions.normalized.1m-giraffe-mapping.gam &&
+nice time vg giraffe -m graph.combined.n32.desegregated-regions.normalized.min -d graph.combined.n32.desegregated-regions.normalized.dist -g graph.combined.n32.desegregated-regions.normalized.gbwt.gg -H graph.combined.n32.desegregated-regions.normalized.gbwt -i -G reads-sim-1m-from-graph-pg.gam -p -t 22 > graph.combined.n32.desegregated-regions.normalized.1m-giraffe-mapping.gam &&
 
 echo "running for unnormalized also..." &&
-echo "making minimizer" &&
-nice time vg minimizer -g graph.combined.gbwt -d graph.dist -o graph.min graph.pg &&
+# echo "making minimizer" &&
+# nice time vg minimizer -g graph.combined.gbwt -d graph.dist -o graph.min graph.pg &&
 echo "running unnormalized giraffe." &&
-nice time vg giraffe  -m graph.min -d graph.dist -g graph.combined.gbwt.gg -H graph.combined.gbwt -G reads-sim-1m-from-graph-pg.gam -p -t 22 > graph.1m-giraffe-mapping.gam &&
+nice time vg giraffe -m graph.min -d graph.dist -g graph.combined.gbwt.gg -H graph.combined.gbwt -i -G reads-sim-1m-from-graph-pg.gam -p -t 22 > graph.1m-giraffe-mapping.gam &&
 echo "done" &&
 
 
