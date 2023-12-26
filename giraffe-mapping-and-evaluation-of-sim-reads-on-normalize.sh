@@ -27,7 +27,6 @@ echo "running unnormalized giraffe." &&
 nice time vg giraffe -m graph.min -d graph.dist -g graph.combined.gbwt.gg -H graph.combined.gbwt -i -G reads-sim-1m-from-graph-pg.gam -p -t 22 > graph.1m-giraffe-mapping.gam &&
 echo "done" &&
 
-
 get_roc_stats () {
     echo "running get_roc_stats"
     TRUTH=$1 # this is the truth set gam (e.g. reads.gam), i.e. the gam the simulated reads came in.
@@ -35,6 +34,7 @@ get_roc_stats () {
     GRAPH=$3 # the graph we mapped the reads to.
     REPORT=$4 # the report.tsv. This will be APPPENDED to, not overwritten. So that we can run this function multiple times and stack up statistics.
     ROC_STATS=$5 # the roc_stats.tsv. Same as above, will be APPENDED to.
+    
     vg gamcompare -r 100 -s <(vg annotate -m -x ${GRAPH} -a ${MAPPED}) ${TRUTH} 2>count | vg view -aj - > compared.json
     CORRECT_COUNT="$(sed -n '1p' count | sed 's/[^0-9]//g')"
     SCORE="$(sed -n '2p' count | sed 's/[^0-9\.]//g')"
@@ -48,12 +48,44 @@ get_roc_stats () {
 }
 
 #make the summary stats for unnormalized
-cat /dev/null > report.tsv &&
-cat /dev/null > roc_stats.tsv &&
+# REPORT=report.tsv
+# ROC_STATS=roc_stats.tsv
+REPORT=report_full.tsv
+ROC_STATS=roc_stats_full.tsv
+cat /dev/null > ${REPORT} &&
+cat /dev/null > ${ROC_STATS} &&
 # get_roc_stats TRUTH MAPPED GRAPH REPORT ROC_STATS
-get_roc_stats reads-sim-1m-from-graph-pg.gam graph.1m-giraffe-mapping.gam graph.pg report.tsv roc_stats.tsv &&
 
+GBWT=unnorm-gbwt
+READS=10m-sim-reads
+PARAM_PRESET=default
+PAIRING=paired
+SPEED=normal-speed
+# CORRECT_COUNT=
+# MAPQ=
+# MAPQ60=
+# IDENTITY=
+# SCORE=
+
+get_roc_stats reads-sim-1m-from-graph-pg.gam graph.1m-giraffe-mapping.gam graph.pg ${REPORT} ${ROC_STATS} &&
+
+GBWT=norm-gbwt
 #make the summary stats for normalized
-get_roc_stats reads-sim-1m-from-graph-pg.gam graph.combined.n32.desegregated-regions.normalized.1m-giraffe-mapping.gam graph.combined.n32.desegregated-regions.normalized.pg report.tsv roc_stats.tsv &&
+get_roc_stats reads-sim-1m-from-graph-pg.gam graph.combined.n32.desegregated-regions.normalized.1m-giraffe-mapping.gam graph.combined.n32.desegregated-regions.normalized.pg ${REPORT} ${ROC_STATS} &&
 
 gzip roc_stats.tsv
+
+
+
+# #scratch:
+# get_roc_stats () {
+#     echo "running get_roc_stats"
+#     TRUTH=$1 # this is the truth set gam (e.g. reads.gam), i.e. the gam the simulated reads came in.
+#     MAPPED=$2 # the re-mapped reads (e.g. mapped.gam) that we'll be scoring.
+#     GRAPH=$3 # the graph we mapped the reads to.
+#     REPORT=$4 # the report.tsv. This will be APPPENDED to, not overwritten. So that we can run this function multiple times and stack up statistics.
+#     ROC_STATS=$5 # the roc_stats.tsv. Same as above, will be APPENDED to.
+    
+#     vg gamcompare -r 100 -s <(vg annotate -m -x ${GRAPH} -a ${MAPPED}) ${TRUTH} 2>count | vg view -aj - > compared.json
+# }
+# get_roc_stats reads-sim-1m-from-graph-pg.gam graph.1m-giraffe-mapping.gam graph.pg report.tsv roc_stats.tsv
