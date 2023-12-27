@@ -34,26 +34,39 @@ get_roc_stats () {
     GRAPH=$3 # the graph we mapped the reads to.
     REPORT=$4 # the report.tsv. This will be APPPENDED to, not overwritten. So that we can run this function multiple times and stack up statistics.
     ROC_STATS=$5 # the roc_stats.tsv. Same as above, will be APPENDED to.
-    
-    vg gamcompare -r 100 -s <(vg annotate -m -x ${GRAPH} -a ${MAPPED}) ${TRUTH} 2>count | vg view -aj - > compared.json
-    CORRECT_COUNT="$(sed -n '1p' count | sed 's/[^0-9]//g')"
-    SCORE="$(sed -n '2p' count | sed 's/[^0-9\.]//g')"
-    MAPQ="$(grep mapping_quality\":\ 60 compared.json | wc -l)"
-    MAPQ60="$(grep -v correctly_mapped compared.json | grep mapping_quality\":\ 60 | wc -l)"
-    IDENTITY="$(jq '.identity' compared.json | awk '{sum+=$1} END {print sum/NR}')"
+    TYPE=$6 #e.g. unnormalized or normalized.
+    KEYWORD=$7
+    COMPARED=${TYPE}.${KEYWORD}.compared.json
+    COUNT=${TYPE}.${KEYWORD}.count
+
+    vg gamcompare -r 100 -s <(vg annotate -m -x ${GRAPH} -a ${MAPPED}) ${TRUTH} 2>${TYPE}.count | vg view -aj - > ${COMPARED}
+    CORRECT_COUNT="$(sed -n '1p' ${COUNT} | sed 's/[^0-9]//g')"
+    SCORE="$(sed -n '2p' ${COUNT} | sed 's/[^0-9\.]//g')"
+    MAPQ="$(grep mapping_quality\":\ 60 ${COMPARED} | wc -l)"
+    MAPQ60="$(grep -v correctly_mapped ${COMPARED} | grep mapping_quality\":\ 60 | wc -l)"
+    IDENTITY="$(jq '.identity' ${COMPARED} | awk '{sum+=$1} END {print sum/NR}')"
     echo ${GRAPH} ${GBWT} ${READS} ${PARAM_PRESET}${PAIRING} ${SPEED} ${CORRECT_COUNT} ${MAPQ} ${MAPQ60} ${IDENTITY} ${SCORE}
     printf "${GRAPH}\t${GBWT}\t${READS}\t${PARAM_PRESET}\t${PAIRING}\t${SPEED}\t${CORRECT_COUNT}\t${MAPQ}\t${MAPQ60}\t${IDENTITY}\t${SCORE}\n" >> ${REPORT}
-    jq -r '(if .correctly_mapped then 1 else 0 end|tostring) + "," + (.mapping_quality|tostring) + "," + (.score|tostring)' compared.json | sed 's/,/\t/g' | sed "s/$/\tgiraffe_${PARAM_PRESET}_${GRAPH}${GBWT}${READS}${PAIRING}/" >> ${ROC_STATS}
-    rm compared.json count #removes the tmp files that this function created.
+    # jq -r '(if .correctly_mapped then 1 else 0 end|tostring) + "," + (.mapping_quality|tostring) + "," + (.score|tostring)' ${COMPARED} | sed 's/,/\t/g' | sed "s/$/\tgiraffe_${PARAM_PRESET}_${GRAPH}${GBWT}${READS}${PAIRING}/" >> ${ROC_STATS} # this is the original entry, which causes bugs with plot-qq and plot-roc.r #todo: save useful data like read_name and score in a way that doesn't mess up the plots.
+    # jq -r '(if .correctly_mapped then 1 else 0 end|tostring) + "," + (.mapping_quality|tostring)' ${COMPARED} | sed 's/,/\t/g' | sed "s/$/\t${TYPE}/" >> ${ROC_STATS}
+    jq -r '(if .correctly_mapped then 1 else 0 end|tostring) + "," + (.mapping_quality|tostring) + "," + (.name|tostring)' ${COMPARED} | sed 's/,/\t/g' | sed "s/$/\t${TYPE}/" >> ${ROC_STATS}
+    gzip -f ${COMPARED}
+    gzip -f ${COUNT}
+    # rm compared.json count #removes the tmp files that this function created.
 }
 
 #make the summary stats for unnormalized
 # REPORT=report.tsv
 # ROC_STATS=roc_stats.tsv
-REPORT=report_full.tsv
-ROC_STATS=roc_stats_full.tsv
+# REPORT=report_full.tsv
+# ROC_STATS=roc_stats_full.tsv
+KEYWORD=reformatted
+REPORT=report_${KEYWORD}.tsv
+ROC_STATS=roc_stats_${KEYWORD}.tsv
 cat /dev/null > ${REPORT} &&
 cat /dev/null > ${ROC_STATS} &&
+echo "correct\tmq\tscore\taligner\tread_name"
+
 # get_roc_stats TRUTH MAPPED GRAPH REPORT ROC_STATS
 
 GBWT=unnorm-gbwt
@@ -67,13 +80,12 @@ SPEED=normal-speed
 # IDENTITY=
 # SCORE=
 
-get_roc_stats reads-sim-1m-from-graph-pg.gam graph.1m-giraffe-mapping.gam graph.pg ${REPORT} ${ROC_STATS} &&
+get_roc_stats reads-sim-1m-from-graph-pg.gam graph.1m-giraffe-mapping.gam graph.pg ${REPORT} ${ROC_STATS} unnormalized ${KEYWORD}&&
 
 GBWT=norm-gbwt
 #make the summary stats for normalized
-get_roc_stats reads-sim-1m-from-graph-pg.gam graph.combined.n32.desegregated-regions.normalized.1m-giraffe-mapping.gam graph.combined.n32.desegregated-regions.normalized.pg ${REPORT} ${ROC_STATS} &&
-
-gzip roc_stats.tsv
+get_roc_stats reads-sim-1m-from-graph-pg.gam graph.combined.n32.desegregated-regions.normalized.1m-giraffe-mapping.gam graph.combined.n32.desegregated-regions.normalized.pg ${REPORT} ${ROC_STATS} normalized ${KEYWORD}&&
+gzip -f ${ROC_STATS}
 
 
 
