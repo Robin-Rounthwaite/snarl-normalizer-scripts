@@ -75,7 +75,7 @@ def make_all_svgs(infile, unnormalized_graph_file, normalized_graph_file, unnorm
                         mapping_quality = mapping_end["mapping_quality"] #todo: only include this info if mapping_quality isn't "NA". Or rather, always make mapping quality the value of the one that isn't "NA".
                         correctly_mapped = mapping_end["correctly_mapped"]
                         read_pair_number += 1
-                        outfile_name = outfile_base_name + read_name + "." + mapping_key.split("_")[0] + "." + mapping_key.split("_")[1] + "."  + "read-pair-" + str(read_pair_number) + "." + "mapping-quality-" + str(mapping_quality) + "." + "correctly-mapped-" + str(correctly_mapped) + "." + "secondary-read-" + str(secondary_read_number) + "." + "reference-position-" + str(min(mapping_end["reference_position"])) + "-" + str(max(mapping_end["reference_position"])) + "." "node-start-end-" + str(min(mapping_end["path"])) + "-" + str(max(mapping_end["path"])) + ".svg"
+                        outfile_name = outfile_base_name + "." + read_name + "." + mapping_key.split("_")[0] + "." + mapping_key.split("_")[1] + "."  + "read-pair-" + str(read_pair_number) + "." + "mapping-quality-" + str(mapping_quality) + "." + "correctly-mapped-" + str(correctly_mapped) + "." + "secondary-read-" + str(secondary_read_number) + "." + "reference-position-" + str(min(mapping_end["reference_position"])) + "-" + str(max(mapping_end["reference_position"])) + "." "node-start-end-" + str(min(mapping_end["path"])) + "-" + str(max(mapping_end["path"])) + ".svg"
 
                         node_list = mapping_end["path"] #TODO: need this to be input format expected by vg find.
 
@@ -93,7 +93,7 @@ def make_all_svgs(infile, unnormalized_graph_file, normalized_graph_file, unnorm
                     mapping_quality = mapping_end["mapping_quality"] #todo: only include this info if mapping_quality isn't "NA". Or rather, always make mapping quality the value of the one that isn't "NA".
                     correctly_mapped = mapping_end["correctly_mapped"]
                     read_pair_number += 1
-                    outfile_name = outfile_base_name + read_name + "." + mapping_key.split("_")[0] + "." + mapping_key.split("_")[1] + "." + "read-pair-" + str(read_pair_number) + "." + "mapping-quality-" + str(mapping_quality) + "." + "correctly-mapped-" + str(correctly_mapped) + "." + "reference-position-" + str(min(mapping_end["reference_position"])) + "-" + str(max(mapping_end["reference_position"])) + "." "node-start-end-" + str(min(mapping_end["path"])) + "-" + str(max(mapping_end["path"])) + ".svg"
+                    outfile_name = outfile_base_name + "." + read_name + "." + mapping_key.split("_")[0] + "." + mapping_key.split("_")[1] + "." + "read-pair-" + str(read_pair_number) + "." + "mapping-quality-" + str(mapping_quality) + "." + "correctly-mapped-" + str(correctly_mapped) + "." + "reference-position-" + str(min(mapping_end["reference_position"])) + "-" + str(max(mapping_end["reference_position"])) + "." "node-start-end-" + str(min(mapping_end["path"])) + "-" + str(max(mapping_end["path"])) + ".svg"
 
                     node_list = mapping_end["path"] #TODO: need this to be input format expected by vg find.
                     if mapping_key.split("_")[0] == "unnormalized":
@@ -125,7 +125,7 @@ def make_svg(graph_file, outfile_name, outfile_base_name, read_name, node_list, 
     vg_filter_command = ["vg", "filter", "-n", read_name + "_", gam_file]
     # print("running vg_filter", vg_filter_command)
     # vg_filter = subprocess.Popen(vg_filter_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    vg_filter_tmp_file = outfile_base_name + "visualize-mapping-changes." + str(tmp_file_randint) + ".vg-filter-tmp.txt"
+    vg_filter_tmp_file = outfile_base_name + "." "visualize-mapping-changes." + str(tmp_file_randint) + ".vg-filter-tmp.txt"
     with open(vg_filter_tmp_file, "w") as vg_filter_tmp_inf:
         vg_filter = subprocess.Popen(vg_filter_command, stdout=vg_filter_tmp_inf, stderr=subprocess.PIPE)
         vg_filter_output = vg_filter.communicate()
@@ -242,8 +242,8 @@ def main():
 
     #required
     parser.add_argument("-a", "--analyze_mappings", type=str, help="the output of analyze-mappings.separate-mapping-entries.py")
-    parser.add_argument("-u", "--unnorm_graph", type=str, help="the unnormalized graph file. Must be xg.")
-    parser.add_argument("-n", "--norm_graph", type=str, help="the normalized graph file. Must be xg.")
+    parser.add_argument("-u", "--unnorm_graph", type=str, help="the unnormalized graph file.")
+    parser.add_argument("-n", "--norm_graph", type=str, help="the normalized graph file.")
     parser.add_argument("-f", "--unnorm_gam", type=str, help="a gam file containing all the reads of interest mapped to the unnorm_graph in the analyze-mappings output")
     parser.add_argument("-g", "--norm_gam", type=str, help="a gam file containing all the reads of interest mapped to the unnorm_graph in the analyze-mappings output")
     parser.add_argument("-o", "--outfile_prefix", type=str, help="the base of all the outfile names. Can include directories.")

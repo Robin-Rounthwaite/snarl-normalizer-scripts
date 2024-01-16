@@ -1,0 +1,51 @@
+vg find -c 4 -x ../graph.xg -n 3559786 -n 3559787 -n 3559789 -n 3559790 -n 3559792 -n 3559793 -n 3559795 -n 3559797 -n 3559798 -n 3559799 -n 3559801 -n 3559802 -n 3559804 -n 3559805 | vg filter -n seed_12345_fragment_52559_
+
+
+-------------------
+
+
+
+
+vg augment hg38-hsvlr_srdedup17_aug.chr6.normalized.vg hg38-hsvlr_srdedup17_aug.chr6.normalized.mpmap.gamp -m 4 -q 5 -Q 5 -A hg38-hsvlr_srdedup17_aug.chr6.normalized.aug.mpmap.gamp > hg38-hsvlr_srdedup17_aug.chr6.normalized.aug.vg && echo "done with vg augment" &&
+ vg snarls hg38-hsvlr_srdedup17_aug.chr6.normalized.aug.vg > hg38-hsvlr_srdedup17_aug.chr6.normalized.aug.snarls.pb && echo " done with vg snarls"  &&
+ vg pack -x hg38-hsvlr_srdedup17_aug.chr6.normalized.aug.vg -g hg38-hsvlr_srdedup17_aug.chr6.normalized.aug.mpmap.gamp -o hg38-hsvlr_srdedup17_aug.chr6.normalized.aug.pack && echo " done with vg pack"  &&
+ vg call hg38-hsvlr_srdedup17_aug.chr6.normalized.aug.vg -r hg38-hsvlr_srdedup17_aug.chr6.normalized.aug.snarls.pb -k hg38-hsvlr_srdedup17_aug.chr6.normalized.aug.pack -s chunk_chr6.gam > hg38-hsvlr_srdedup17_aug.chr6.normalized.variant_calls.vcf && echo " done with vg call" 
+
+
+----------------------
+
+
+nice vg convert -p hg38-hsvlr_srdedup17_aug.normalized.vg > hg38-hsvlr_srdedup17_aug.normalized.pg && echo "done with convert" &&
+nice vg convert -x hg38-hsvlr_srdedup17_aug.normalized.pg > hg38-hsvlr_srdedup17_aug.normalized.xg && echo "done with convert" &&
+nice vg paths -r -p refpaths.txt -v hg38-hsvlr_srdedup17_aug.normalized.pg | nice vg prune -t 16 -M 32 --restore-paths - > hg38-hsvlr_srdedup17_aug.normalized.pruned.pg && echo "done with vg prune" &&
+nice vg index -g hg38-hsvlr_srdedup17_aug.normalized.gcsa hg38-hsvlr_srdedup17_aug.normalized.pruned.xg && echo "done with index gcsa" &&
+nice vg index -j hg38-hsvlr_srdedup17_aug.normalized.dist hg38-hsvlr_srdedup17_aug.normalized.xg && echo "done with index dist" &&
+nice vg mpmap -t 16 -x hg38-hsvlr_srdedup17_aug.normalized.xg -g hg38-hsvlr_srdedup17_aug.normalized.gcsa -d hg38-hsvlr_srdedup17_aug.normalized.dist -s hg38-hsvlr_srdedup17_aug.normalized.snarls -G HG002-hg38-hsvlr_srdedup17_aug.giraffe29k11w32N_fast.gam >hg38-hsvlr_srdedup17_aug.normalized.mpmap-aln.gamp && echo “done with mpmap” &&
+nice vg augment hg38-hsvlr_srdedup17_aug.normalized.pg hg38-hsvlr_srdedup17_aug.normalized.mpmap-aln.gamp -m 4 -q 5 -Q 5 -A hg38-hsvlr_srdedup17_aug.normalized.aug.mpmap-aln.gamp > hg38-hsvlr_srdedup17_aug.normalized.aug.pg && echo "done with vg augment" &&
+nice vg snarls hg38-hsvlr_srdedup17_aug.normalized.aug.pg > hg38-hsvlr_srdedup17_aug.normalized.aug.snarls.pb && echo " done with vg snarls"  &&
+nice vg pack -x hg38-hsvlr_srdedup17_aug.normalized.aug.pg -g hg38-hsvlr_srdedup17_aug.normalized.aug.mpmap-aln.gamp -o hg38-hsvlr_srdedup17_aug.normalized.aug.pack && echo " done with vg pack"  &&
+nice vg call hg38-hsvlr_srdedup17_aug.normalized.aug.pg -r hg38-hsvlr_srdedup17_aug.normalized.aug.snarls.pb -k hg38-hsvlr_srdedup17_aug.normalized.aug.pack -s chunk_chr6.gam > hg38-hsvlr_srdedup17_aug.normalized.variant_calls.vcf && echo " done with vg call" 
+
+
+
+
+
+vg index -g hg38-hsvlr_srdedup17_aug.normalized.gcsa -j hg38-hsvlr_srdedup17_aug.normalized.dist hg38-hsvlr_srdedup17_aug.normalized.pg && echo "done with index" &&
+vg mpmap -x hg38-hsvlr_srdedup17_aug.normalized.xg -g hg38-hsvlr_srdedup17_aug.normalized.gcsa -d hg38-hsvlr_srdedup17_aug.normalized.dist -s hg38-hsvlr_srdedup17_aug.normalized.snarls -G HG002-hg38-hsvlr_srdedup17_aug.giraffe29k11w32N_fast.gam >hg38-hsvlr_srdedup17_aug.normalized.mpmap-aln.gamp && echo “done with mpmap” &&
+vg convert -p hg38-hsvlr_srdedup17_aug.normalized.xg > hg38-hsvlr_srdedup17_aug.normalized.pg && echo "done with convert" &&
+vg augment hg38-hsvlr_srdedup17_aug.normalized.pg hg38-hsvlr_srdedup17_aug.normalized.mpmap-aln.gamp -m 4 -q 5 -Q 5 -A hg38-hsvlr_srdedup17_aug.normalized.aug.mpmap-aln.gamp > hg38-hsvlr_srdedup17_aug.normalized.aug.pg && echo "done with vg augment" &&
+vg snarls hg38-hsvlr_srdedup17_aug.normalized.aug.pg > hg38-hsvlr_srdedup17_aug.normalized.aug.snarls.pb && echo " done with vg snarls"  &&
+vg pack -x hg38-hsvlr_srdedup17_aug.normalized.aug.pg -g hg38-hsvlr_srdedup17_aug.normalized.aug.mpmap-aln.gamp -o hg38-hsvlr_srdedup17_aug.normalized.aug.pack && echo " done with vg pack"  &&
+vg call hg38-hsvlr_srdedup17_aug.normalized.aug.pg -r hg38-hsvlr_srdedup17_aug.normalized.aug.snarls.pb -k hg38-hsvlr_srdedup17_aug.normalized.aug.pack -s chunk_chr6.gam > hg38-hsvlr_srdedup17_aug.normalized.variant_calls.vcf && echo " done with vg call" 
+
+
+----------------
+
+#vg normalize and convert
+vg convert -a hg38-hsvlr_srdedup17_aug.xg > hg38-hsvlr_srdedup17_aug.vg && vg normalize -g hg38-hsvlr_srdedup17_aug.N32.gbwt -r hg38-hsvlr_srdedup17_aug.N32.gg -s hg38-hsvlr_srdedup17_aug.snarls -o hg38-hsvlr_srdedup17_aug.N32.normalized.gbwt  >hg38-hsvlr_srdedup17_aug.normalized.vg
+
+#get chr6 (and chunk the gam at the same time)
+vg convert -F HG002-hg38-hsvlr_srdedup17_aug.giraffe29k11w32N_fast.gaf.gz hg38-hsvlr_srdedup17_aug.xg > HG002-hg38-hsvlr_srdedup17_aug.giraffe29k11w32N_fast.gam && echo "moving to chunk" && vg chunk -x hg38-hsvlr_srdedup17_aug.xg -g -a HG002-hg38-hsvlr_srdedup17_aug.giraffe29k11w32N_fast.gam -p chr6 >hg38-hsvlr_srdedup17_aug.chr6.vg
+
+#perform mpmapping
+vg mpmap -x hg38-hsvlr_srdedup17_aug.xg -g hg38-hsvlr_srdedup17_aug.gcsa -d hg38-hsvlr_srdedup17_aug.dist -s hg38-hsvlr_srdedup17_aug.snarls -G HG002-hg38-hsvlr_srdedup17_aug.giraffe29k11w32N_fast.gam >hg38-hsvlr_srdedup17_aug.mpmap-aln.gamp
