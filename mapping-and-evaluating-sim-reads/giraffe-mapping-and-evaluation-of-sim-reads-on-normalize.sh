@@ -18,8 +18,10 @@ NORM_GAM=graph.combined.n32.desegregated-regions.normalized.1m-hg002-chr21-reads
 UNNORM_GAM=graph.unnormalized.1m-hg002-chr21-reads.gam
 
 #mapping to normalized
+#todo! Replace the full gbwt with the giraffe.gbwt. That may be what's causing giraffe to run for too long.
 nice time vg giraffe -m graph.combined.n32.desegregated-regions.normalized.min -d graph.combined.n32.desegregated-regions.normalized.dist -g graph.combined.n32.desegregated-regions.normalized.gbwt.gg -H graph.combined.n32.desegregated-regions.normalized.gbwt -i -G ${TRUTH_GAM} -p -t 22 > ${NORM_GAM} &&
 #mapping to unnormalized
+#todo: same with this gbwt.
 nice time vg giraffe -m graph.min -d graph.dist -g graph.combined.gbwt.gg -H graph.combined.gbwt -i -G ${TRUTH_GAM} -p -t 22 > ${UNNORM_GAM} &&
 
 

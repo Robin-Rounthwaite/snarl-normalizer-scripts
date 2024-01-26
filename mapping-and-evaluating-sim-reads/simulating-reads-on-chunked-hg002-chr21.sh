@@ -26,3 +26,5 @@ vg sim --num-reads 1000000 --frag-len 500 --read-length 100 --random-seed 9999 -
 # HG002#2#JAHKSD010000028.1#0     3574531
 # HG002#2#JAHKSD010000059.1#0     34173178
 # HG002#2#JAHKSD010000164.1#0     1296141
+
+

@@ -1,3 +1,6 @@
+#!/bin/bash
+set -ex
+
 # files in mustard nygc:
 #        4096 chr21
 #           0 nygc_snp1kg_grch38.combined.n32.segregated-regions.normalized.pg
