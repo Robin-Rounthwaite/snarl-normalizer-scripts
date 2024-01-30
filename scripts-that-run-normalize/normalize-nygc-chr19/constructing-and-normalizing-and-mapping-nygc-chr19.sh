@@ -61,35 +61,3 @@ nice time vg normalize --run_tests -t 20 -g nygc.chr19.segregated-regions.gbwt -
 # done with /home/robin/paten_lab/vg-team/vg/robin-scripts/mapping-and-evaluating-sim-reads/creating-hg002-grch38-chr19-graph-and-sim-reads.sh
 
 #### mapping experiment.
-
-####scratch/junk:
-#scp for chr19 files from mustard to local.
-# nygc_snp1kg_grch38.chr19.gbwt -r nygc_snp1kg_grch38.chr19.gbwt.gg -d nygc_snp1kg_grch38.chr19.dist -S nygc_snp1kg_grch38.chr19.segregated-regions.data.txt -o nygc_snp1kg_grch38.chr19.segregated-regions.gbwt nygc_snp1kg_grch38.chr19.segregated-regions.pg > nygc_snp1kg_grch38.chr19.desegregated.normalized.pg
-
-
-# scp rrounthw@mustard:/private/groups/patenlab/rrounthw/nygc/chr19/nygc_snp1kg_grch38.chr19.* .
-
-
-
-# # #### preparation for normalize
-
-# ##proper vg gbwt indexing (includes the variants and the reference)
-
-
-# # gunzip -c CCDG_14151_B01_GRM_WGS_2020-08-05_chr19.filtered.shapeit2-duohmm-phased.vcf.gz > CCDG_14151_B01_GRM_WGS_2020-08-05_chr19.filtered.shapeit2-duohmm-phased.vcf
-
-# nice time vg gbwt -v CCDG_14151_B01_GRM_WGS_2020-08-05_chr19.filtered.shapeit2-duohmm-phased.vcf.gz -x nygc_snp1kg_grch38.chr19.pg -o nygc_snp1kg_grch38.chr19.variants.gbwt
-
-# # nice time vg gbwt --index-paths -x nygc_snp1kg_grch38.chr19.pg -o nygc_snp1kg_grch38.chr19.ref-only.gbwt 
-# mv nygc_snp1kg_grch38.chr19.gbwt nygc_snp1kg_grch38.chr19.ref-only.gbwt #did this instead of above line.
-
-# nice time vg gbwt -m -o nygc_snp1kg_grch38.chr19.full.gbwt -g nygc_snp1kg_grch38.chr19.full.gbwt.gg nygc_snp1kg_grch38.chr19.ref-only.gbwt nygc_snp1kg_grch38.chr19.variants.gbwt
-
-# nice time vg normalize -g nygc_snp1kg_grch38.chr19.full.gbtw -r nygc_snp1kg_grch38.chr19.full.gbwt.gg -d nygc_snp1kg_grch38.chr19.dist -s nygc_snp1kg_grch38.chr19.segregated-regions.data.txt -o nygc_snp1kg_grch38.chr19.segregated-regions.gbwt nygc_snp1kg_grch38.chr19.pg > nygc_snp1kg_grch38.chr19.segregated-regions.pg
-# 
-
-# #create the gbwt graph:
-# vg gbwt -g nygc_snp1kg_grch38.chr19.segregated-regions.gbwt.gg -x nygc_snp1kg_grch38.chr19.segregated-regions.pg nygc_snp1kg_grch38.chr19.segregated-regions.gbwt
-
-# #normalize the segregated-regions graph.
-# nice time vg normalize --run_tests -t 20 -g nygc_snp1kg_grch38.chr19.segregated-regions.gbwt -r nygc_snp1kg_grch38.chr19.segregated-regions.gbwt.gg -d nygc_snp1kg_grch38.chr19.dist -S nygc_snp1kg_grch38.chr19.segregated-regions.data.txt -o nygc_snp1kg_grch38.chr19.segregated-regions.gbwt nygc_snp1kg_grch38.chr19.segregated-regions.pg > nygc_snp1kg_grch38.chr19.desegregated.normalized.pg
