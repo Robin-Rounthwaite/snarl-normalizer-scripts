@@ -3,20 +3,9 @@ set -ex
 cd /private/groups/patenlab/rrounthw/vg/
 git pull
 . ./source_me.sh && make -j 20
-cd /private/groups/patenlab/rrounthw/nygc/
+cd /private/groups/patenlab/rrounthw/nygc/chr19/chr19-from-scratch
 
-# mkdir -p chr19
-
-# # extract chr21 component (no longer necessary since Glenn told me which paths I needed to use.)
-# nice time vg chunk -x nygc_snp1kg_grch38.pg -Cp chr19 > chr19/nygc_snp1kg_grch38.chr19.pg
-
-cd chr19
-
-mkdir -p chr19-from-scratch
-
-cd chr19-from-scratch
-
-vg construct -a -r ../sim-hg002-reads/chr19.fa.gz -v ../CCDG_14151_B01_GRM_WGS_2020-08-05_chr19.filtered.shapeit2-duohmm-phased.vcf.gz > nygc.chr19.vg
+vg construct -a -r chr19.fa -v ../CCDG_14151_B01_GRM_WGS_2020-08-05_chr19.filtered.shapeit2-duohmm-phased.vcf.gz > nygc.chr19.vg
 
 vg stats -F nygc.chr19.vg # to see if it's a pg.
 
