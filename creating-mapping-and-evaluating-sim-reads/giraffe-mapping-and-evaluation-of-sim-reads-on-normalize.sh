@@ -1,3 +1,5 @@
+#!ALERT: this is an outdated script. See /home/robin/paten_lab/vg-team/vg/robin-scripts/scripts-that-run-normalize/normalize-nygc-chr19/constructing-and-normalizing-and-mapping-nygc-chr19.sh
+
 #!/bin/bash
 set -ex
 cd /private/groups/patenlab/rrounthw/vg

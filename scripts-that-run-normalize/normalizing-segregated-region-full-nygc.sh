@@ -35,10 +35,32 @@ set -ex
 # On Screen 0:
 # for full genome:
 cd /private/groups/patenlab/rrounthw/vg &&
+# git checkout robin-investigate-slow-nygc-snarls
 git pull && . ./source_me.sh && make -j 20 &&
 cd /private/groups/patenlab/rrounthw/nygc/ &&
-nice time vg normalize --run_tests -g nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt -r nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt.gg -t 30 -n 32 -o nygc_snp1kg_grch38.combined.n32.desegregated.normalized.gbwt -S nygc_snp1kg_grch38.combined.n32.segregated-regions-data.txt nygc_snp1kg_grch38.combined.n32.segregated-regions.pg > nygc_snp1kg_grch38.combined.n32.desegregated.normalized.pg
+#below is the single-snarl normalize run that I want to test debugging on:
+nice time vg normalize --run_tests --skip_desegregate -g nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt -r nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt.gg -t 30 -n 32 -o nygc_snp1kg_grch38.combined.n32.desegregated.normalized.gbwt -S segregated-regions-data.normalize-244496945-244496959-only.txt nygc_snp1kg_grch38.combined.n32.segregated-regions.pg > nygc_snp1kg_grch38.combined.n32.desegregated.normalized.pg
+#below is the full normalize run that I want to run after debugging:
+# nice time vg normalize --run_tests -g nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt -r nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt.gg -t 30 -n 32 -o nygc_snp1kg_grch38.combined.n32.desegregated.normalized.gbwt -S nygc_snp1kg_grch38.combined.n32.segregated-regions-data.txt nygc_snp1kg_grch38.combined.n32.segregated-regions.pg > nygc_snp1kg_grch38.combined.n32.desegregated.normalized.pg
 
 #note: outdated version of creation of segregated-regions, kept for records:
 # nice vg normalize --run_tests -d nygc_snp1kg_grch38.new.dist -g nygc_snp1kg_grch38.all.gbwt -r nygc_snp1kg_grch38.gg -t 20 -n 32 --debug_print --run_tests -o nygc_snp1kg_grch38.n32.segregated-regions.gbwt -s nygc_snp1kg_grch38.n32.segregated-regions-data.txt nygc_snp1kg_grch38.pg > nygc_snp1kg_grch38.n32.segregated-regions.pg
 # time vg gbwt -g nygc_snp1kg_grch38.n32.segregated-regions.gbwt.gg -x nygc_snp1kg_grch38.n32.segregated-regions.vg nygc_snp1kg_grch38.n32.segregated-regions.gbwt &&
+
+#### read mapping
+
+
+# #### variant calling (from /home/robin/paten_lab/vg-team/vg/kubernetes_jobs/snarl_normalization/2023-06-20.sveval-unnormalized-graph.yml)
+#           BIN_VERSION="1.5.0"
+#           docker run \
+#             -v "$(pwd)":"/io" \
+#             google/deepvariant:"${BIN_VERSION}" \
+#             /opt/deepvariant/bin/run_deepvariant \
+#             --model_type=WGS \
+#             --ref=/io/hg38.fa \
+#             --reads=/io/hg38-hsvlr_srdedup17_aug.robin-giraffe-29k11w32N.bam \
+#             --output_vcf=/io/hg38-hsvlr_srdedup17_aug.robin-giraffe-29k11w32N.deepvariant.vcf \
+#             --output_gvcf=/io/hg38-hsvlr_srdedup17_aug.robin-giraffe-29k11w32N.deepvariant.gvcf \
+#             --num_shards=$(nproc) \ 
+#             --logging_dir=/io/unnormalized-logs \
+#             --dry_run=false
