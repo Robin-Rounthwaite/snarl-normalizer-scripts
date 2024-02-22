@@ -34,6 +34,11 @@ cd /private/groups/patenlab/rrounthw/nygc/chr19/chr19-from-scratch
 # nice time vg index -j nygc.chr19.dist nygc.chr19.pg
 
 
+
+#test/debug normalize run:
+# UNNORM_BASE=nygc.chr19 && SEGREGATED_BASE=${UNNORM_BASE}.segregated-regions && NORM_BASE=${UNNORM_BASE}.desegregated.normalized && INPUT_GBWT=${UNNORM_BASE}.combined.gbwt && cd ~/paten_lab/vg-team/vg/ && . ./source_me.sh && make -j 20 &&  cd ~/paten_lab/vg-team/vg/robin-graphs/nygc-chr19 && nice time vg normalize --run_tests --skip_desegregate -t 1 -g ${SEGREGATED_BASE}.gbwt -r ${SEGREGATED_BASE}.gbwt.gg -d ${UNNORM_BASE}.dist -S /home/robin/paten_lab/vg-team/vg/robin-scripts/scratch/chr19-snarls-that-take-a-long-time.made-into-segregated-regions.txt -o ${NORM_BASE}.gbwt ${SEGREGATED_BASE}.pg > ${NORM_BASE}.skip-desegregate.pg 2> test-stderr-3.txt
+
+
 #### normalize
 UNNORM_BASE=nygc.chr19
 SEGREGATED_BASE=${UNNORM_BASE}.segregated-regions
@@ -42,22 +47,28 @@ NORM_BASE=${UNNORM_BASE}.desegregated.normalized
 INPUT_GBWT=${UNNORM_BASE}.combined.gbwt #gets special treatment because of the ".combined." inclusion.
 
 #make the segregated-regions graph.
-nice time vg normalize -g ${INPUT_GBWT} -r ${INPUT_GBWT}.gg -d ${UNNORM_BASE}.dist -s ${SEGREGATED_BASE}.data.txt -o ${SEGREGATED_BASE}.gbwt ${UNNORM_BASE}.pg > ${SEGREGATED_BASE}.pg
+# nice time vg normalize -g ${INPUT_GBWT} -r ${INPUT_GBWT}.gg -d ${UNNORM_BASE}.dist -s ${SEGREGATED_BASE}.data.txt -o ${SEGREGATED_BASE}.gbwt ${UNNORM_BASE}.pg > ${SEGREGATED_BASE}.pg
 
 #create the gbwt graph:
-nice time vg gbwt -g ${SEGREGATED_BASE}.gbwt.gg -x ${SEGREGATED_BASE}.pg ${SEGREGATED_BASE}.gbwt
+# nice time vg gbwt -g ${SEGREGATED_BASE}.gbwt.gg -x ${SEGREGATED_BASE}.pg ${SEGREGATED_BASE}.gbwt
 
 #normalize the segregated-regions graph.``
-nice time vg normalize --run_tests -t 20 -g ${SEGREGATED_BASE}.gbwt -r ${SEGREGATED_BASE}.gbwt.gg -d ${UNNORM_BASE}.dist -S ${SEGREGATED_BASE}.data.txt -o ${NORM_BASE}.gbwt ${SEGREGATED_BASE}.pg > ${NORM_BASE}.pg
+# nice time vg normalize --run_tests -t 20 -g ${SEGREGATED_BASE}.gbwt -r ${SEGREGATED_BASE}.gbwt.gg -d ${UNNORM_BASE}.dist -S ${SEGREGATED_BASE}.data.txt -o ${NORM_BASE}.gbwt ${SEGREGATED_BASE}.pg > ${NORM_BASE}.pg
+
+####for debuggging:
+# nice time vg normalize --run_tests --skip_desegregate -t 20 -g ${SEGREGATED_BASE}.gbwt -r ${SEGREGATED_BASE}.gbwt.gg -d ${UNNORM_BASE}.dist -S ${SEGREGATED_BASE}.data.txt -o ${NORM_BASE}.gbwt ${SEGREGATED_BASE}.pg > ${NORM_BASE}.skip-desegregate.pg
+#for skip_desegregate:
+# UNNORM_BASE=nygc.chr19 && SEGREGATED_BASE=${UNNORM_BASE}.segregated-regions && NORM_BASE=${UNNORM_BASE}.desegregated.normalized && INPUT_GBWT=${UNNORM_BASE}.combined.gbwt && nice time vg normalize --skip_desegregate --run_tests -t 20 -g ${SEGREGATED_BASE}.gbwt -r ${SEGREGATED_BASE}.gbwt.gg -d ${UNNORM_BASE}.dist -S ${SEGREGATED_BASE}.data.txt -o ${NORM_BASE}.gbwt ${SEGREGATED_BASE}.pg > ${NORM_BASE}.skip-desegregate.pg
+####end debugging.
 
 #### get the necessary giraffe input files:
 ##generate giraffe .gbwt and gg 
 #unnorm:
-nice time vg gbwt -l -x ${UNNORM_BASE}.pg -o ${UNNORM_BASE}.giraffe.gbwt
+nice time vg gbwt -l -x ${UNNORM_BASE}.pg -o ${UNNORM_BASE}.giraffe.gbwt ${INPUT_GBWT}
 nice time vg gbwt -g ${UNNORM_BASE}.giraffe.gbwt.gg -x ${UNNORM_BASE}.pg ${UNNORM_BASE}.giraffe.gbwt
 
 #norm:
-nice time vg gbwt -l -x ${NORM_BASE}.pg -o ${NORM_BASE}.giraffe.gbwt
+nice time vg gbwt -l -x ${NORM_BASE}.pg -o ${NORM_BASE}.giraffe.gbwt ${NORM_BASE}.gbwt
 nice time vg gbwt -g ${NORM_BASE}.giraffe.gbwt.gg -x ${NORM_BASE}.pg ${NORM_BASE}.giraffe.gbwt
 
 ##generate normalized .dist
@@ -137,18 +148,3 @@ get_roc_stats ${TRUTH_GAM} ${NORM_GAM} graph.combined.n32.desegregated-regions.n
 sed -i 's/null/-1/g' ${ROC_STATS} #turn nulls into -1 so that they don't mess up the plot-qq/plot-roc.
 gzip -f ${ROC_STATS}
 
-
-# #### variant calling
-#           BIN_VERSION="1.5.0"
-#           docker run \
-#             -v "$(pwd)":"/io" \
-#             google/deepvariant:"${BIN_VERSION}" \
-#             /opt/deepvariant/bin/run_deepvariant \
-#             --model_type=WGS \
-#             --ref=/io/hg38.fa \
-#             --reads=/io/hg38-hsvlr_srdedup17_aug.robin-giraffe-29k11w32N.bam \
-#             --output_vcf=/io/hg38-hsvlr_srdedup17_aug.robin-giraffe-29k11w32N.deepvariant.vcf \
-#             --output_gvcf=/io/hg38-hsvlr_srdedup17_aug.robin-giraffe-29k11w32N.deepvariant.gvcf \
-#             --num_shards=$(nproc) \ 
-#             --logging_dir=/io/unnormalized-logs \
-#             --dry_run=false

@@ -34,14 +34,17 @@ set -ex
 # January 15th 2024 
 # On Screen 0:
 # for full genome:
+# cd /private/groups/patenlab/rrounthw/vg-second/vg &&
 cd /private/groups/patenlab/rrounthw/vg &&
 # git checkout robin-investigate-slow-nygc-snarls
 git pull && . ./source_me.sh && make -j 20 &&
 cd /private/groups/patenlab/rrounthw/nygc/ &&
 #below is the single-snarl normalize run that I want to test debugging on:
-nice time vg normalize --run_tests --skip_desegregate -g nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt -r nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt.gg -t 30 -n 32 -o nygc_snp1kg_grch38.combined.n32.desegregated.normalized.gbwt -S segregated-regions-data.normalize-244496945-244496959-only.txt nygc_snp1kg_grch38.combined.n32.segregated-regions.pg > nygc_snp1kg_grch38.combined.n32.desegregated.normalized.pg
+# nice time vg normalize --run_tests --skip_desegregate -g nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt -r nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt.gg -t 30 -n 32 -o nygc_snp1kg_grch38.combined.n32.desegregated.normalized.gbwt -S segregated-regions-data.normalize-244496945-244496959-and-more.txt nygc_snp1kg_grch38.combined.n32.segregated-regions.pg > nygc_snp1kg_grch38.combined.n32.desegregated.normalized.pg
+#below is the full norm but skipping desegregate (for debugging, save the stderr to a file.) (only ever ran directly on a screen)
+# nice time vg normalize --skip_desegregate --run_tests -g nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt -r nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt.gg -t 30 -n 32 -o nygc_snp1kg_grch38.combined.n32.desegregated.normalized.gbwt -S nygc_snp1kg_grch38.combined.n32.segregated-regions-data.txt nygc_snp1kg_grch38.combined.n32.segregated-regions.pg > nygc_snp1kg_grch38.combined.n32.skip-desegregate.has-slow-snarls.normalized.pg 2>watchdog-slow-snarls.full-genome.stderr.txt
 #below is the full normalize run that I want to run after debugging:
-# nice time vg normalize --run_tests -g nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt -r nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt.gg -t 30 -n 32 -o nygc_snp1kg_grch38.combined.n32.desegregated.normalized.gbwt -S nygc_snp1kg_grch38.combined.n32.segregated-regions-data.txt nygc_snp1kg_grch38.combined.n32.segregated-regions.pg > nygc_snp1kg_grch38.combined.n32.desegregated.normalized.pg
+nice time vg normalize --run_tests -g nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt -r nygc_snp1kg_grch38.combined.n32.segregated-regions.gbwt.gg -t 30 -T 8 -n 32 -o nygc_snp1kg_grch38.combined.n32.desegregated.normalized.gbwt -S nygc_snp1kg_grch38.combined.n32.segregated-regions-data.txt nygc_snp1kg_grch38.combined.n32.segregated-regions.pg > nygc_snp1kg_grch38.combined.n32.desegregated.normalized.pg
 
 #note: outdated version of creation of segregated-regions, kept for records:
 # nice vg normalize --run_tests -d nygc_snp1kg_grch38.new.dist -g nygc_snp1kg_grch38.all.gbwt -r nygc_snp1kg_grch38.gg -t 20 -n 32 --debug_print --run_tests -o nygc_snp1kg_grch38.n32.segregated-regions.gbwt -s nygc_snp1kg_grch38.n32.segregated-regions-data.txt nygc_snp1kg_grch38.pg > nygc_snp1kg_grch38.n32.segregated-regions.pg

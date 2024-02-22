@@ -1,0 +1,1317 @@
+haplotype_queue.size() 1
+we're generating searches from the follow paths of 985730
+adjacent handle to state of 985730 is 985732
+next_searches.size() is: 1
+looking at next_search of id 985732
+third if 
+pushing back handle985732
+haplotype_queue.at(cur_haplotype_index).first.size() 2
+next_search: 985732
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985730
+next_searches.size() is: 1
+in next_searches, search is: 985732
+haplotype_queue.size() is: 1
+985732
+we're generating searches from the follow paths of 985732
+adjacent handle to state of 985732 is 985733
+next_searches.size() is: 1
+looking at next_search of id 985733
+third if 
+pushing back handle985733
+haplotype_queue.at(cur_haplotype_index).first.size() 3
+next_search: 985733
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985732
+next_searches.size() is: 1
+in next_searches, search is: 985733
+haplotype_queue.size() is: 1
+985733
+we're generating searches from the follow paths of 985733
+adjacent handle to state of 985733 is 985734
+next_searches.size() is: 1
+looking at next_search of id 985734
+third if 
+pushing back handle985734
+haplotype_queue.at(cur_haplotype_index).first.size() 4
+next_search: 985734
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985733
+next_searches.size() is: 1
+in next_searches, search is: 985734
+haplotype_queue.size() is: 1
+985734
+we're generating searches from the follow paths of 985734
+adjacent handle to state of 985734 is 985735
+next_searches.size() is: 1
+looking at next_search of id 985735
+third if 
+pushing back handle985735
+haplotype_queue.at(cur_haplotype_index).first.size() 5
+next_search: 985735
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985734
+next_searches.size() is: 1
+in next_searches, search is: 985735
+haplotype_queue.size() is: 1
+985735
+we're generating searches from the follow paths of 985735
+adjacent handle to state of 985735 is 985736
+next_searches.size() is: 1
+looking at next_search of id 985736
+third if 
+pushing back handle985736
+haplotype_queue.at(cur_haplotype_index).first.size() 6
+next_search: 985736
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985735
+next_searches.size() is: 1
+in next_searches, search is: 985736
+haplotype_queue.size() is: 1
+985736
+we're generating searches from the follow paths of 985736
+adjacent handle to state of 985736 is 985738
+next_searches.size() is: 1
+looking at next_search of id 985738
+third if 
+pushing back handle985738
+haplotype_queue.at(cur_haplotype_index).first.size() 7
+next_search: 985738
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985736
+next_searches.size() is: 1
+in next_searches, search is: 985738
+haplotype_queue.size() is: 1
+985738
+we're generating searches from the follow paths of 985738
+adjacent handle to state of 985738 is 985739
+next_searches.size() is: 1
+looking at next_search of id 985739
+third if 
+pushing back handle985739
+haplotype_queue.at(cur_haplotype_index).first.size() 8
+next_search: 985739
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985738
+next_searches.size() is: 1
+in next_searches, search is: 985739
+haplotype_queue.size() is: 1
+985739
+we're generating searches from the follow paths of 985739
+adjacent handle to state of 985739 is 985741
+next_searches.size() is: 1
+looking at next_search of id 985741
+third if 
+pushing back handle985741
+haplotype_queue.at(cur_haplotype_index).first.size() 9
+next_search: 985741
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985739
+next_searches.size() is: 1
+in next_searches, search is: 985741
+haplotype_queue.size() is: 1
+985741
+we're generating searches from the follow paths of 985741
+adjacent handle to state of 985741 is 985742
+next_searches.size() is: 1
+looking at next_search of id 985742
+third if 
+pushing back handle985742
+haplotype_queue.at(cur_haplotype_index).first.size() 10
+next_search: 985742
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985741
+next_searches.size() is: 1
+in next_searches, search is: 985742
+haplotype_queue.size() is: 1
+985742
+we're generating searches from the follow paths of 985742
+adjacent handle to state of 985742 is 985743
+next_searches.size() is: 1
+looking at next_search of id 985743
+third if 
+pushing back handle985743
+haplotype_queue.at(cur_haplotype_index).first.size() 11
+next_search: 985743
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985742
+next_searches.size() is: 1
+in next_searches, search is: 985743
+haplotype_queue.size() is: 1
+985743
+we're generating searches from the follow paths of 985743
+adjacent handle to state of 985743 is 985745
+next_searches.size() is: 1
+looking at next_search of id 985745
+third if 
+pushing back handle985745
+haplotype_queue.at(cur_haplotype_index).first.size() 12
+next_search: 985745
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985743
+next_searches.size() is: 1
+in next_searches, search is: 985745
+haplotype_queue.size() is: 1
+985745
+we're generating searches from the follow paths of 985745
+adjacent handle to state of 985745 is 985747
+next_searches.size() is: 1
+looking at next_search of id 985747
+third if 
+pushing back handle985747
+haplotype_queue.at(cur_haplotype_index).first.size() 13
+next_search: 985747
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985745
+next_searches.size() is: 1
+in next_searches, search is: 985747
+haplotype_queue.size() is: 1
+985747
+we're generating searches from the follow paths of 985747
+adjacent handle to state of 985747 is 985748
+next_searches.size() is: 1
+looking at next_search of id 985748
+third if 
+pushing back handle985748
+haplotype_queue.at(cur_haplotype_index).first.size() 14
+next_search: 985748
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985747
+next_searches.size() is: 1
+in next_searches, search is: 985748
+haplotype_queue.size() is: 1
+985748
+we're generating searches from the follow paths of 985748
+adjacent handle to state of 985748 is 985750
+next_searches.size() is: 1
+looking at next_search of id 985750
+third if 
+pushing back handle985750
+haplotype_queue.at(cur_haplotype_index).first.size() 15
+next_search: 985750
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985748
+next_searches.size() is: 1
+in next_searches, search is: 985750
+haplotype_queue.size() is: 1
+985750
+we're generating searches from the follow paths of 985750
+adjacent handle to state of 985750 is 985751
+next_searches.size() is: 1
+looking at next_search of id 985751
+third if 
+pushing back handle985751
+haplotype_queue.at(cur_haplotype_index).first.size() 16
+next_search: 985751
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985750
+next_searches.size() is: 1
+in next_searches, search is: 985751
+haplotype_queue.size() is: 1
+985751
+we're generating searches from the follow paths of 985751
+adjacent handle to state of 985751 is 985753
+next_searches.size() is: 1
+looking at next_search of id 985753
+third if 
+pushing back handle985753
+haplotype_queue.at(cur_haplotype_index).first.size() 17
+next_search: 985753
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985751
+next_searches.size() is: 1
+in next_searches, search is: 985753
+haplotype_queue.size() is: 1
+985753
+we're generating searches from the follow paths of 985753
+adjacent handle to state of 985753 is 985754
+next_searches.size() is: 1
+looking at next_search of id 985754
+third if 
+pushing back handle985754
+haplotype_queue.at(cur_haplotype_index).first.size() 18
+next_search: 985754
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985753
+next_searches.size() is: 1
+in next_searches, search is: 985754
+haplotype_queue.size() is: 1
+985754
+we're generating searches from the follow paths of 985754
+adjacent handle to state of 985754 is 985756
+next_searches.size() is: 1
+looking at next_search of id 985756
+third if 
+pushing back handle985756
+haplotype_queue.at(cur_haplotype_index).first.size() 19
+next_search: 985756
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985754
+next_searches.size() is: 1
+in next_searches, search is: 985756
+haplotype_queue.size() is: 1
+985756
+we're generating searches from the follow paths of 985756
+adjacent handle to state of 985756 is 985757
+next_searches.size() is: 1
+looking at next_search of id 985757
+third if 
+pushing back handle985757
+haplotype_queue.at(cur_haplotype_index).first.size() 20
+next_search: 985757
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985756
+next_searches.size() is: 1
+in next_searches, search is: 985757
+haplotype_queue.size() is: 1
+985757
+we're generating searches from the follow paths of 985757
+adjacent handle to state of 985757 is 985759
+next_searches.size() is: 1
+looking at next_search of id 985759
+third if 
+pushing back handle985759
+haplotype_queue.at(cur_haplotype_index).first.size() 21
+next_search: 985759
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985757
+next_searches.size() is: 1
+in next_searches, search is: 985759
+haplotype_queue.size() is: 1
+985759
+we're generating searches from the follow paths of 985759
+adjacent handle to state of 985759 is 985760
+next_searches.size() is: 1
+looking at next_search of id 985760
+third if 
+pushing back handle985760
+haplotype_queue.at(cur_haplotype_index).first.size() 22
+next_search: 985760
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985759
+next_searches.size() is: 1
+in next_searches, search is: 985760
+haplotype_queue.size() is: 1
+985760
+we're generating searches from the follow paths of 985760
+adjacent handle to state of 985760 is 985762
+next_searches.size() is: 1
+looking at next_search of id 985762
+third if 
+pushing back handle985762
+haplotype_queue.at(cur_haplotype_index).first.size() 23
+next_search: 985762
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985760
+next_searches.size() is: 1
+in next_searches, search is: 985762
+haplotype_queue.size() is: 1
+985762
+we're generating searches from the follow paths of 985762
+adjacent handle to state of 985762 is 985763
+next_searches.size() is: 1
+looking at next_search of id 985763
+third if 
+pushing back handle985763
+haplotype_queue.at(cur_haplotype_index).first.size() 24
+next_search: 985763
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985762
+next_searches.size() is: 1
+in next_searches, search is: 985763
+haplotype_queue.size() is: 1
+985763
+we're generating searches from the follow paths of 985763
+adjacent handle to state of 985763 is 985764
+next_searches.size() is: 1
+looking at next_search of id 985764
+third if 
+pushing back handle985764
+haplotype_queue.at(cur_haplotype_index).first.size() 25
+next_search: 985764
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985763
+next_searches.size() is: 1
+in next_searches, search is: 985764
+haplotype_queue.size() is: 1
+985764
+we're generating searches from the follow paths of 985764
+adjacent handle to state of 985764 is 985765
+next_searches.size() is: 1
+looking at next_search of id 985765
+third if 
+pushing back handle985765
+haplotype_queue.at(cur_haplotype_index).first.size() 26
+next_search: 985765
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985764
+next_searches.size() is: 1
+in next_searches, search is: 985765
+haplotype_queue.size() is: 1
+985765
+we're generating searches from the follow paths of 985765
+adjacent handle to state of 985765 is 985767
+next_searches.size() is: 1
+looking at next_search of id 985767
+third if 
+pushing back handle985767
+haplotype_queue.at(cur_haplotype_index).first.size() 27
+next_search: 985767
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985765
+next_searches.size() is: 1
+in next_searches, search is: 985767
+haplotype_queue.size() is: 1
+985767
+we're generating searches from the follow paths of 985767
+adjacent handle to state of 985767 is 985768
+next_searches.size() is: 1
+looking at next_search of id 985768
+third if 
+pushing back handle985768
+haplotype_queue.at(cur_haplotype_index).first.size() 28
+next_search: 985768
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985767
+next_searches.size() is: 1
+in next_searches, search is: 985768
+haplotype_queue.size() is: 1
+985768
+we're generating searches from the follow paths of 985768
+adjacent handle to state of 985768 is 985770
+next_searches.size() is: 1
+looking at next_search of id 985770
+third if 
+pushing back handle985770
+haplotype_queue.at(cur_haplotype_index).first.size() 29
+next_search: 985770
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985768
+next_searches.size() is: 1
+in next_searches, search is: 985770
+haplotype_queue.size() is: 1
+985770
+we're generating searches from the follow paths of 985770
+adjacent handle to state of 985770 is 985772
+next_searches.size() is: 1
+looking at next_search of id 985772
+third if 
+pushing back handle985772
+haplotype_queue.at(cur_haplotype_index).first.size() 30
+next_search: 985772
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985770
+next_searches.size() is: 1
+in next_searches, search is: 985772
+haplotype_queue.size() is: 1
+985772
+we're generating searches from the follow paths of 985772
+adjacent handle to state of 985772 is 985773
+next_searches.size() is: 1
+looking at next_search of id 985773
+third if 
+pushing back handle985773
+haplotype_queue.at(cur_haplotype_index).first.size() 31
+next_search: 985773
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985772
+next_searches.size() is: 1
+in next_searches, search is: 985773
+haplotype_queue.size() is: 1
+985773
+we're generating searches from the follow paths of 985773
+adjacent handle to state of 985773 is 985775
+next_searches.size() is: 1
+looking at next_search of id 985775
+third if 
+pushing back handle985775
+haplotype_queue.at(cur_haplotype_index).first.size() 32
+next_search: 985775
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985773
+next_searches.size() is: 1
+in next_searches, search is: 985775
+haplotype_queue.size() is: 1
+985775
+we're generating searches from the follow paths of 985775
+adjacent handle to state of 985775 is 985776
+next_searches.size() is: 1
+looking at next_search of id 985776
+third if 
+pushing back handle985776
+haplotype_queue.at(cur_haplotype_index).first.size() 33
+next_search: 985776
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985775
+next_searches.size() is: 1
+in next_searches, search is: 985776
+haplotype_queue.size() is: 1
+985776
+we're generating searches from the follow paths of 985776
+adjacent handle to state of 985776 is 985778
+next_searches.size() is: 1
+looking at next_search of id 985778
+third if 
+pushing back handle985778
+haplotype_queue.at(cur_haplotype_index).first.size() 34
+next_search: 985778
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985776
+next_searches.size() is: 1
+in next_searches, search is: 985778
+haplotype_queue.size() is: 1
+985778
+we're generating searches from the follow paths of 985778
+adjacent handle to state of 985778 is 985779
+next_searches.size() is: 1
+looking at next_search of id 985779
+third if 
+pushing back handle985779
+haplotype_queue.at(cur_haplotype_index).first.size() 35
+next_search: 985779
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985778
+next_searches.size() is: 1
+in next_searches, search is: 985779
+haplotype_queue.size() is: 1
+985779
+we're generating searches from the follow paths of 985779
+adjacent handle to state of 985779 is 985781
+next_searches.size() is: 1
+looking at next_search of id 985781
+third if 
+pushing back handle985781
+haplotype_queue.at(cur_haplotype_index).first.size() 36
+next_search: 985781
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985779
+next_searches.size() is: 1
+in next_searches, search is: 985781
+haplotype_queue.size() is: 1
+985781
+we're generating searches from the follow paths of 985781
+adjacent handle to state of 985781 is 985782
+next_searches.size() is: 1
+looking at next_search of id 985782
+third if 
+pushing back handle985782
+haplotype_queue.at(cur_haplotype_index).first.size() 37
+next_search: 985782
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985781
+next_searches.size() is: 1
+in next_searches, search is: 985782
+haplotype_queue.size() is: 1
+985782
+we're generating searches from the follow paths of 985782
+adjacent handle to state of 985782 is 985783
+next_searches.size() is: 1
+looking at next_search of id 985783
+third if 
+pushing back handle985783
+haplotype_queue.at(cur_haplotype_index).first.size() 38
+next_search: 985783
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985782
+next_searches.size() is: 1
+in next_searches, search is: 985783
+haplotype_queue.size() is: 1
+985783
+we're generating searches from the follow paths of 985783
+adjacent handle to state of 985783 is 985785
+next_searches.size() is: 1
+looking at next_search of id 985785
+third if 
+pushing back handle985785
+haplotype_queue.at(cur_haplotype_index).first.size() 39
+next_search: 985785
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985783
+next_searches.size() is: 1
+in next_searches, search is: 985785
+haplotype_queue.size() is: 1
+985785
+we're generating searches from the follow paths of 985785
+adjacent handle to state of 985785 is 5683363
+next_searches.size() is: 1
+looking at next_search of id 5683363
+third if 
+pushing back handle5683363
+haplotype_queue.at(cur_haplotype_index).first.size() 40
+next_search: 5683363
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985785
+next_searches.size() is: 1
+in next_searches, search is: 5683363
+haplotype_queue.size() is: 1
+5683363
+we're generating searches from the follow paths of 5683363
+adjacent handle to state of 5683363 is 985786
+next_searches.size() is: 1
+looking at next_search of id 985786
+third if 
+pushing back handle985786
+haplotype_queue.at(cur_haplotype_index).first.size() 41
+next_search: 985786
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 5683363
+next_searches.size() is: 1
+in next_searches, search is: 985786
+haplotype_queue.size() is: 1
+985786
+we're generating searches from the follow paths of 985786
+adjacent handle to state of 985786 is 985788
+next_searches.size() is: 1
+looking at next_search of id 985788
+third if 
+pushing back handle985788
+haplotype_queue.at(cur_haplotype_index).first.size() 42
+next_search: 985788
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985786
+next_searches.size() is: 1
+in next_searches, search is: 985788
+haplotype_queue.size() is: 1
+985788
+we're generating searches from the follow paths of 985788
+adjacent handle to state of 985788 is 985789
+next_searches.size() is: 1
+looking at next_search of id 985789
+third if 
+pushing back handle985789
+haplotype_queue.at(cur_haplotype_index).first.size() 43
+next_search: 985789
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985788
+next_searches.size() is: 1
+in next_searches, search is: 985789
+haplotype_queue.size() is: 1
+985789
+we're generating searches from the follow paths of 985789
+adjacent handle to state of 985789 is 985791
+next_searches.size() is: 1
+looking at next_search of id 985791
+third if 
+pushing back handle985791
+haplotype_queue.at(cur_haplotype_index).first.size() 44
+next_search: 985791
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985789
+next_searches.size() is: 1
+in next_searches, search is: 985791
+haplotype_queue.size() is: 1
+985791
+we're generating searches from the follow paths of 985791
+adjacent handle to state of 985791 is 985792
+next_searches.size() is: 1
+looking at next_search of id 985792
+third if 
+pushing back handle985792
+haplotype_queue.at(cur_haplotype_index).first.size() 45
+next_search: 985792
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985791
+next_searches.size() is: 1
+in next_searches, search is: 985792
+haplotype_queue.size() is: 1
+985792
+we're generating searches from the follow paths of 985792
+adjacent handle to state of 985792 is 985793
+next_searches.size() is: 1
+looking at next_search of id 985793
+third if 
+pushing back handle985793
+haplotype_queue.at(cur_haplotype_index).first.size() 46
+next_search: 985793
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985792
+next_searches.size() is: 1
+in next_searches, search is: 985793
+haplotype_queue.size() is: 1
+985793
+we're generating searches from the follow paths of 985793
+adjacent handle to state of 985793 is 985795
+next_searches.size() is: 1
+looking at next_search of id 985795
+third if 
+pushing back handle985795
+haplotype_queue.at(cur_haplotype_index).first.size() 47
+next_search: 985795
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985793
+next_searches.size() is: 1
+in next_searches, search is: 985795
+haplotype_queue.size() is: 1
+985795
+we're generating searches from the follow paths of 985795
+adjacent handle to state of 985795 is 985796
+next_searches.size() is: 1
+looking at next_search of id 985796
+third if 
+pushing back handle985796
+haplotype_queue.at(cur_haplotype_index).first.size() 48
+next_search: 985796
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985795
+next_searches.size() is: 1
+in next_searches, search is: 985796
+haplotype_queue.size() is: 1
+985796
+we're generating searches from the follow paths of 985796
+adjacent handle to state of 985796 is 985798
+next_searches.size() is: 1
+looking at next_search of id 985798
+third if 
+pushing back handle985798
+haplotype_queue.at(cur_haplotype_index).first.size() 49
+next_search: 985798
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985796
+next_searches.size() is: 1
+in next_searches, search is: 985798
+haplotype_queue.size() is: 1
+985798
+we're generating searches from the follow paths of 985798
+adjacent handle to state of 985798 is 985799
+next_searches.size() is: 1
+looking at next_search of id 985799
+third if 
+pushing back handle985799
+haplotype_queue.at(cur_haplotype_index).first.size() 50
+next_search: 985799
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985798
+next_searches.size() is: 1
+in next_searches, search is: 985799
+haplotype_queue.size() is: 1
+985799
+we're generating searches from the follow paths of 985799
+adjacent handle to state of 985799 is 985800
+next_searches.size() is: 1
+looking at next_search of id 985800
+third if 
+pushing back handle985800
+haplotype_queue.at(cur_haplotype_index).first.size() 51
+next_search: 985800
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985799
+next_searches.size() is: 1
+in next_searches, search is: 985800
+haplotype_queue.size() is: 1
+985800
+we're generating searches from the follow paths of 985800
+adjacent handle to state of 985800 is 985802
+next_searches.size() is: 1
+looking at next_search of id 985802
+third if 
+pushing back handle985802
+haplotype_queue.at(cur_haplotype_index).first.size() 52
+next_search: 985802
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985800
+next_searches.size() is: 1
+in next_searches, search is: 985802
+haplotype_queue.size() is: 1
+985802
+we're generating searches from the follow paths of 985802
+adjacent handle to state of 985802 is 985803
+next_searches.size() is: 1
+looking at next_search of id 985803
+third if 
+pushing back handle985803
+haplotype_queue.at(cur_haplotype_index).first.size() 53
+next_search: 985803
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985802
+next_searches.size() is: 1
+in next_searches, search is: 985803
+haplotype_queue.size() is: 1
+985803
+we're generating searches from the follow paths of 985803
+adjacent handle to state of 985803 is 985805
+next_searches.size() is: 1
+looking at next_search of id 985805
+third if 
+pushing back handle985805
+haplotype_queue.at(cur_haplotype_index).first.size() 54
+next_search: 985805
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985803
+next_searches.size() is: 1
+in next_searches, search is: 985805
+haplotype_queue.size() is: 1
+985805
+we're generating searches from the follow paths of 985805
+adjacent handle to state of 985805 is 985807
+next_searches.size() is: 1
+looking at next_search of id 985807
+third if 
+pushing back handle985807
+haplotype_queue.at(cur_haplotype_index).first.size() 55
+next_search: 985807
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985805
+next_searches.size() is: 1
+in next_searches, search is: 985807
+haplotype_queue.size() is: 1
+985807
+we're generating searches from the follow paths of 985807
+adjacent handle to state of 985807 is 985808
+next_searches.size() is: 1
+looking at next_search of id 985808
+third if 
+pushing back handle985808
+haplotype_queue.at(cur_haplotype_index).first.size() 56
+next_search: 985808
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985807
+next_searches.size() is: 1
+in next_searches, search is: 985808
+haplotype_queue.size() is: 1
+985808
+we're generating searches from the follow paths of 985808
+adjacent handle to state of 985808 is 985810
+next_searches.size() is: 1
+looking at next_search of id 985810
+third if 
+pushing back handle985810
+haplotype_queue.at(cur_haplotype_index).first.size() 57
+next_search: 985810
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985808
+next_searches.size() is: 1
+in next_searches, search is: 985810
+haplotype_queue.size() is: 1
+985810
+we're generating searches from the follow paths of 985810
+adjacent handle to state of 985810 is 985811
+next_searches.size() is: 1
+looking at next_search of id 985811
+third if 
+pushing back handle985811
+haplotype_queue.at(cur_haplotype_index).first.size() 58
+next_search: 985811
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985810
+next_searches.size() is: 1
+in next_searches, search is: 985811
+haplotype_queue.size() is: 1
+985811
+we're generating searches from the follow paths of 985811
+adjacent handle to state of 985811 is 985812
+next_searches.size() is: 1
+looking at next_search of id 985812
+third if 
+pushing back handle985812
+haplotype_queue.at(cur_haplotype_index).first.size() 59
+next_search: 985812
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985811
+next_searches.size() is: 1
+in next_searches, search is: 985812
+haplotype_queue.size() is: 1
+985812
+we're generating searches from the follow paths of 985812
+adjacent handle to state of 985812 is 985813
+next_searches.size() is: 1
+looking at next_search of id 985813
+third if 
+pushing back handle985813
+haplotype_queue.at(cur_haplotype_index).first.size() 60
+next_search: 985813
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985812
+next_searches.size() is: 1
+in next_searches, search is: 985813
+haplotype_queue.size() is: 1
+985813
+we're generating searches from the follow paths of 985813
+adjacent handle to state of 985813 is 985815
+next_searches.size() is: 1
+looking at next_search of id 985815
+third if 
+pushing back handle985815
+haplotype_queue.at(cur_haplotype_index).first.size() 61
+next_search: 985815
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985813
+next_searches.size() is: 1
+in next_searches, search is: 985815
+haplotype_queue.size() is: 1
+985815
+we're generating searches from the follow paths of 985815
+adjacent handle to state of 985815 is 985816
+next_searches.size() is: 1
+looking at next_search of id 985816
+third if 
+pushing back handle985816
+haplotype_queue.at(cur_haplotype_index).first.size() 62
+next_search: 985816
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985815
+next_searches.size() is: 1
+in next_searches, search is: 985816
+haplotype_queue.size() is: 1
+985816
+we're generating searches from the follow paths of 985816
+adjacent handle to state of 985816 is 985817
+next_searches.size() is: 1
+looking at next_search of id 985817
+third if 
+pushing back handle985817
+haplotype_queue.at(cur_haplotype_index).first.size() 63
+next_search: 985817
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985816
+next_searches.size() is: 1
+in next_searches, search is: 985817
+haplotype_queue.size() is: 1
+985817
+we're generating searches from the follow paths of 985817
+adjacent handle to state of 985817 is 985819
+next_searches.size() is: 1
+looking at next_search of id 985819
+third if 
+pushing back handle985819
+haplotype_queue.at(cur_haplotype_index).first.size() 64
+next_search: 985819
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985817
+next_searches.size() is: 1
+in next_searches, search is: 985819
+haplotype_queue.size() is: 1
+985819
+we're generating searches from the follow paths of 985819
+adjacent handle to state of 985819 is 985821
+next_searches.size() is: 1
+looking at next_search of id 985821
+third if 
+pushing back handle985821
+haplotype_queue.at(cur_haplotype_index).first.size() 65
+next_search: 985821
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985819
+next_searches.size() is: 1
+in next_searches, search is: 985821
+haplotype_queue.size() is: 1
+985821
+we're generating searches from the follow paths of 985821
+adjacent handle to state of 985821 is 985822
+next_searches.size() is: 1
+looking at next_search of id 985822
+third if 
+pushing back handle985822
+haplotype_queue.at(cur_haplotype_index).first.size() 66
+next_search: 985822
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985821
+next_searches.size() is: 1
+in next_searches, search is: 985822
+haplotype_queue.size() is: 1
+985822
+we're generating searches from the follow paths of 985822
+adjacent handle to state of 985822 is 985824
+next_searches.size() is: 1
+looking at next_search of id 985824
+third if 
+pushing back handle985824
+haplotype_queue.at(cur_haplotype_index).first.size() 67
+next_search: 985824
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985822
+next_searches.size() is: 1
+in next_searches, search is: 985824
+haplotype_queue.size() is: 1
+985824
+we're generating searches from the follow paths of 985824
+adjacent handle to state of 985824 is 985825
+next_searches.size() is: 1
+looking at next_search of id 985825
+third if 
+pushing back handle985825
+haplotype_queue.at(cur_haplotype_index).first.size() 68
+next_search: 985825
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985824
+next_searches.size() is: 1
+in next_searches, search is: 985825
+haplotype_queue.size() is: 1
+985825
+we're generating searches from the follow paths of 985825
+adjacent handle to state of 985825 is 985826
+next_searches.size() is: 1
+looking at next_search of id 985826
+third if 
+pushing back handle985826
+haplotype_queue.at(cur_haplotype_index).first.size() 69
+next_search: 985826
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985825
+next_searches.size() is: 1
+in next_searches, search is: 985826
+haplotype_queue.size() is: 1
+985826
+we're generating searches from the follow paths of 985826
+adjacent handle to state of 985826 is 985828
+next_searches.size() is: 1
+looking at next_search of id 985828
+third if 
+pushing back handle985828
+haplotype_queue.at(cur_haplotype_index).first.size() 70
+next_search: 985828
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985826
+next_searches.size() is: 1
+in next_searches, search is: 985828
+haplotype_queue.size() is: 1
+985828
+we're generating searches from the follow paths of 985828
+adjacent handle to state of 985828 is 985829
+next_searches.size() is: 1
+looking at next_search of id 985829
+third if 
+pushing back handle985829
+haplotype_queue.at(cur_haplotype_index).first.size() 71
+next_search: 985829
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985828
+next_searches.size() is: 1
+in next_searches, search is: 985829
+haplotype_queue.size() is: 1
+985829
+we're generating searches from the follow paths of 985829
+adjacent handle to state of 985829 is 985831
+next_searches.size() is: 1
+looking at next_search of id 985831
+third if 
+pushing back handle985831
+haplotype_queue.at(cur_haplotype_index).first.size() 72
+next_search: 985831
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985829
+next_searches.size() is: 1
+in next_searches, search is: 985831
+haplotype_queue.size() is: 1
+985831
+we're generating searches from the follow paths of 985831
+adjacent handle to state of 985831 is 985832
+next_searches.size() is: 1
+looking at next_search of id 985832
+third if 
+pushing back handle985832
+haplotype_queue.at(cur_haplotype_index).first.size() 73
+next_search: 985832
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985831
+next_searches.size() is: 1
+in next_searches, search is: 985832
+haplotype_queue.size() is: 1
+985832
+we're generating searches from the follow paths of 985832
+adjacent handle to state of 985832 is 985833
+next_searches.size() is: 1
+looking at next_search of id 985833
+third if 
+pushing back handle985833
+haplotype_queue.at(cur_haplotype_index).first.size() 74
+next_search: 985833
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985832
+next_searches.size() is: 1
+in next_searches, search is: 985833
+haplotype_queue.size() is: 1
+985833
+we're generating searches from the follow paths of 985833
+adjacent handle to state of 985833 is 985834
+next_searches.size() is: 1
+looking at next_search of id 985834
+third if 
+pushing back handle985834
+haplotype_queue.at(cur_haplotype_index).first.size() 75
+next_search: 985834
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985833
+next_searches.size() is: 1
+in next_searches, search is: 985834
+haplotype_queue.size() is: 1
+985834
+we're generating searches from the follow paths of 985834
+adjacent handle to state of 985834 is 985836
+next_searches.size() is: 1
+looking at next_search of id 985836
+third if 
+pushing back handle985836
+haplotype_queue.at(cur_haplotype_index).first.size() 76
+next_search: 985836
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985834
+next_searches.size() is: 1
+in next_searches, search is: 985836
+haplotype_queue.size() is: 1
+985836
+we're generating searches from the follow paths of 985836
+adjacent handle to state of 985836 is 985838
+next_searches.size() is: 1
+looking at next_search of id 985838
+third if 
+pushing back handle985838
+haplotype_queue.at(cur_haplotype_index).first.size() 77
+next_search: 985838
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985836
+next_searches.size() is: 1
+in next_searches, search is: 985838
+haplotype_queue.size() is: 1
+985838
+we're generating searches from the follow paths of 985838
+adjacent handle to state of 985838 is 985839
+next_searches.size() is: 1
+looking at next_search of id 985839
+third if 
+pushing back handle985839
+haplotype_queue.at(cur_haplotype_index).first.size() 78
+next_search: 985839
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985838
+next_searches.size() is: 1
+in next_searches, search is: 985839
+haplotype_queue.size() is: 1
+985839
+we're generating searches from the follow paths of 985839
+adjacent handle to state of 985839 is 985841
+next_searches.size() is: 1
+looking at next_search of id 985841
+third if 
+pushing back handle985841
+haplotype_queue.at(cur_haplotype_index).first.size() 79
+next_search: 985841
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985839
+next_searches.size() is: 1
+in next_searches, search is: 985841
+haplotype_queue.size() is: 1
+985841
+we're generating searches from the follow paths of 985841
+adjacent handle to state of 985841 is 985842
+next_searches.size() is: 1
+looking at next_search of id 985842
+third if 
+pushing back handle985842
+haplotype_queue.at(cur_haplotype_index).first.size() 80
+next_search: 985842
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985841
+next_searches.size() is: 1
+in next_searches, search is: 985842
+haplotype_queue.size() is: 1
+985842
+we're generating searches from the follow paths of 985842
+adjacent handle to state of 985842 is 985844
+next_searches.size() is: 1
+looking at next_search of id 985844
+third if 
+pushing back handle985844
+haplotype_queue.at(cur_haplotype_index).first.size() 81
+next_search: 985844
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985842
+next_searches.size() is: 1
+in next_searches, search is: 985844
+haplotype_queue.size() is: 1
+985844
+we're generating searches from the follow paths of 985844
+adjacent handle to state of 985844 is 985845
+next_searches.size() is: 1
+looking at next_search of id 985845
+third if 
+pushing back handle985845
+haplotype_queue.at(cur_haplotype_index).first.size() 82
+next_search: 985845
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985844
+next_searches.size() is: 1
+in next_searches, search is: 985845
+haplotype_queue.size() is: 1
+985845
+we're generating searches from the follow paths of 985845
+adjacent handle to state of 985845 is 985846
+next_searches.size() is: 1
+looking at next_search of id 985846
+third if 
+pushing back handle985846
+haplotype_queue.at(cur_haplotype_index).first.size() 83
+next_search: 985846
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985845
+next_searches.size() is: 1
+in next_searches, search is: 985846
+haplotype_queue.size() is: 1
+985846
+we're generating searches from the follow paths of 985846
+adjacent handle to state of 985846 is 985848
+next_searches.size() is: 1
+looking at next_search of id 985848
+third if 
+pushing back handle985848
+haplotype_queue.at(cur_haplotype_index).first.size() 84
+next_search: 985848
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985846
+next_searches.size() is: 1
+in next_searches, search is: 985848
+haplotype_queue.size() is: 1
+985848
+we're generating searches from the follow paths of 985848
+adjacent handle to state of 985848 is 985849
+next_searches.size() is: 1
+looking at next_search of id 985849
+third if 
+pushing back handle985849
+haplotype_queue.at(cur_haplotype_index).first.size() 85
+next_search: 985849
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985848
+next_searches.size() is: 1
+in next_searches, search is: 985849
+haplotype_queue.size() is: 1
+985849
+we're generating searches from the follow paths of 985849
+adjacent handle to state of 985849 is 985850
+next_searches.size() is: 1
+looking at next_search of id 985850
+third if 
+pushing back handle985850
+haplotype_queue.at(cur_haplotype_index).first.size() 86
+next_search: 985850
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985849
+next_searches.size() is: 1
+in next_searches, search is: 985850
+haplotype_queue.size() is: 1
+985850
+we're generating searches from the follow paths of 985850
+adjacent handle to state of 985850 is 985852
+next_searches.size() is: 1
+looking at next_search of id 985852
+third if 
+pushing back handle985852
+haplotype_queue.at(cur_haplotype_index).first.size() 87
+next_search: 985852
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985850
+next_searches.size() is: 1
+in next_searches, search is: 985852
+haplotype_queue.size() is: 1
+985852
+we're generating searches from the follow paths of 985852
+adjacent handle to state of 985852 is 985853
+next_searches.size() is: 1
+looking at next_search of id 985853
+third if 
+pushing back handle985853
+haplotype_queue.at(cur_haplotype_index).first.size() 88
+next_search: 985853
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985852
+next_searches.size() is: 1
+in next_searches, search is: 985853
+haplotype_queue.size() is: 1
+985853
+we're generating searches from the follow paths of 985853
+adjacent handle to state of 985853 is 985855
+next_searches.size() is: 1
+looking at next_search of id 985855
+third if 
+pushing back handle985855
+haplotype_queue.at(cur_haplotype_index).first.size() 89
+next_search: 985855
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985853
+next_searches.size() is: 1
+in next_searches, search is: 985855
+haplotype_queue.size() is: 1
+985855
+we're generating searches from the follow paths of 985855
+adjacent handle to state of 985855 is 985857
+next_searches.size() is: 1
+looking at next_search of id 985857
+third if 
+pushing back handle985857
+haplotype_queue.at(cur_haplotype_index).first.size() 90
+next_search: 985857
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985855
+next_searches.size() is: 1
+in next_searches, search is: 985857
+haplotype_queue.size() is: 1
+985857
+we're generating searches from the follow paths of 985857
+adjacent handle to state of 985857 is 985858
+next_searches.size() is: 1
+looking at next_search of id 985858
+third if 
+pushing back handle985858
+haplotype_queue.at(cur_haplotype_index).first.size() 91
+next_search: 985858
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985857
+next_searches.size() is: 1
+in next_searches, search is: 985858
+haplotype_queue.size() is: 1
+985858
+we're generating searches from the follow paths of 985858
+adjacent handle to state of 985858 is 985859
+next_searches.size() is: 1
+looking at next_search of id 985859
+third if 
+pushing back handle985859
+haplotype_queue.at(cur_haplotype_index).first.size() 92
+next_search: 985859
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985858
+next_searches.size() is: 1
+in next_searches, search is: 985859
+haplotype_queue.size() is: 1
+985859
+we're generating searches from the follow paths of 985859
+adjacent handle to state of 985859 is 985860
+next_searches.size() is: 1
+looking at next_search of id 985860
+third if 
+pushing back handle985860
+haplotype_queue.at(cur_haplotype_index).first.size() 93
+next_search: 985860
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985859
+next_searches.size() is: 1
+in next_searches, search is: 985860
+haplotype_queue.size() is: 1
+985860
+we're generating searches from the follow paths of 985860
+adjacent handle to state of 985860 is 985861
+next_searches.size() is: 1
+looking at next_search of id 985861
+third if 
+pushing back handle985861
+haplotype_queue.at(cur_haplotype_index).first.size() 94
+next_search: 985861
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985860
+next_searches.size() is: 1
+in next_searches, search is: 985861
+haplotype_queue.size() is: 1
+985861
+we're generating searches from the follow paths of 985861
+adjacent handle to state of 985861 is 5683365
+next_searches.size() is: 1
+looking at next_search of id 5683365
+third if 
+pushing back handle5683365
+haplotype_queue.at(cur_haplotype_index).first.size() 95
+next_search: 5683365
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985861
+next_searches.size() is: 1
+in next_searches, search is: 5683365
+haplotype_queue.size() is: 1
+5683365
+we're generating searches from the follow paths of 5683365
+adjacent handle to state of 5683365 is 985862
+next_searches.size() is: 1
+looking at next_search of id 985862
+third if 
+pushing back handle985862
+haplotype_queue.at(cur_haplotype_index).first.size() 96
+next_search: 985862
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 5683365
+next_searches.size() is: 1
+in next_searches, search is: 985862
+haplotype_queue.size() is: 1
+985862
+we're generating searches from the follow paths of 985862
+adjacent handle to state of 985862 is 985864
+next_searches.size() is: 1
+looking at next_search of id 985864
+third if 
+pushing back handle985864
+haplotype_queue.at(cur_haplotype_index).first.size() 97
+next_search: 985864
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985862
+next_searches.size() is: 1
+in next_searches, search is: 985864
+haplotype_queue.size() is: 1
+985864
+we're generating searches from the follow paths of 985864
+adjacent handle to state of 985864 is 985865
+next_searches.size() is: 1
+looking at next_search of id 985865
+third if 
+pushing back handle985865
+haplotype_queue.at(cur_haplotype_index).first.size() 98
+next_search: 985865
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985864
+next_searches.size() is: 1
+in next_searches, search is: 985865
+haplotype_queue.size() is: 1
+985865
+we're generating searches from the follow paths of 985865
+adjacent handle to state of 985865 is 985866
+next_searches.size() is: 1
+looking at next_search of id 985866
+third if 
+pushing back handle985866
+haplotype_queue.at(cur_haplotype_index).first.size() 99
+next_search: 985866
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985865
+next_searches.size() is: 1
+in next_searches, search is: 985866
+haplotype_queue.size() is: 1
+985866
+we're generating searches from the follow paths of 985866
+adjacent handle to state of 985866 is 985867
+next_searches.size() is: 1
+looking at next_search of id 985867
+third if 
+pushing back handle985867
+haplotype_queue.at(cur_haplotype_index).first.size() 100
+next_search: 985867
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985866
+next_searches.size() is: 1
+in next_searches, search is: 985867
+haplotype_queue.size() is: 1
+985867
+we're generating searches from the follow paths of 985867
+adjacent handle to state of 985867 is 985869
+next_searches.size() is: 1
+looking at next_search of id 985869
+third if 
+pushing back handle985869
+haplotype_queue.at(cur_haplotype_index).first.size() 101
+next_search: 985869
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985867
+next_searches.size() is: 1
+in next_searches, search is: 985869
+haplotype_queue.size() is: 1
+985869
+we're generating searches from the follow paths of 985869
+adjacent handle to state of 985869 is 985870
+next_searches.size() is: 1
+looking at next_search of id 985870
+third if 
+pushing back handle985870
+haplotype_queue.at(cur_haplotype_index).first.size() 102
+next_search: 985870
+_gbwt_graph.get_id(haplotype_queue.at(cur_haplotype_index).first.back()) 985869
+next_searches.size() is: 1
+in next_searches, search is: 985870
+haplotype_queue.size() is: 1
+985870
+Command exited with non-zero status 1
+38.78user 1.28system 0:39.99elapsed 100%CPU (0avgtext+0avgdata 2679004maxresident)k
+0inputs+0outputs (0major+687994minor)pagefaults 0swaps
