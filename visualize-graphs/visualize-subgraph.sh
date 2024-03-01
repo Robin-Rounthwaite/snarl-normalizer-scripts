@@ -18,12 +18,17 @@ vg find -n ${NODE_ID} -c ${CONTEXT} -x ${SEGREGATED_BASE}.pg| vg view -dp - | do
 chromium-browser ${SEGREGATED_BASE}.c-${CONTEXT}.n-${NODE_ID}.svg &
 
 #Feb 21 2024 (using "Old Way," since the node ids aren't necessarily consecutively ordered in norm.)
+cd ~/paten_lab/vg-team/vg/
+. ./source_me.sh && make -j 20
 cd ~/paten_lab/vg-team/vg/robin-graphs/nygc-chr19/
 UNNORM_BASE=nygc.chr19
 NORM_BASE=${UNNORM_BASE}.desegregated.normalized
-CONTEXT=10
+
 LEFT_NODE_ID=2008817
 RIGHT_NODE_ID=2008887
+# LEFT_NODE_ID=4458402
+# RIGHT_NODE_ID=4458524
+
 UNNORM_SUBGRAPH_BASE=${UNNORM_BASE}.${LEFT_NODE_ID}-${RIGHT_NODE_ID}
 NORM_SUBGRAPH_BASE=${NORM_BASE}.${LEFT_NODE_ID}-${RIGHT_NODE_ID}
 vg normalize -D ${LEFT_NODE_ID}:${RIGHT_NODE_ID} ${NORM_BASE}.pg > ${NORM_SUBGRAPH_BASE}.region_nodes.txt 

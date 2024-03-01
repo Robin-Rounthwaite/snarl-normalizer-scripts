@@ -1,0 +1,1 @@
+vg normalize -D 1:1 nygc.chr19.pg
