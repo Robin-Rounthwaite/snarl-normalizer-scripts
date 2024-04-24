@@ -26,9 +26,13 @@ cactus-pangenome ./js ./chr19-hg002-seqfile.txt --outDir ./chr19-hg002-graph/ --
 cd /private/groups/patenlab/rrounthw/nygc/chr19/sim-hg002-reads/chr19-hg002-graph
 
 #see which paths are on the graph. (to insert manually into the next command)
-vg paths -Ev chr19-hg002.xg | sort
+vg paths -Ex chr19-hg002.xg | sort
 
 nice time vg sim --num-reads 1000000 --frag-len 500 --read-length 100 --random-seed 9999 --progress -x chr19-hg002.xg --align-out -P HG002#1#JAHKSE010000050.1#655 -P HG002#1#JAHKSE010000056.1#99 -P HG002#1#JAHKSE010000058.1#16 -P HG002#1#JAHKSE010000061.1#1298003 -P HG002#1#JAHKSE010000139.1#4636 -P hg002#2#JAHKSD010000015.1#1108 -P hg002#2#JAHKSD010000042.1#0 -P hg002#2#JAHKSD010000042.1#29382422 -P hg002#2#JAHKSD010000042.1#52728260 -P hg002#2#JAHKSD010000079.1#0 -P hg002#2#JAHKSD010000133.1#5264 -P hg002#2#JAHKSD010000195.1#6354 -P hg002#2#JAHKSD010000425.1#0 >/private/groups/patenlab/rrounthw/nygc/chr19/sim-hg002-reads/sim-1m-reads.chr19-hg002.gam
+
+#NOTE: the following sim command was used on an old version of the graph with weird stuff like name "chr19" -> "chr19#0" in gfa edits. It didn't work. I'm using a different graph now. 
+            # NOTE: needed to do sim reads again to make the paths compatible. They're kinda wonky now, but hey, it should work. (but it currently includes a bug where you lose some of the contigs of above during xg->gfa->pg conversion. Because all the numbers after "#" go to 0.)
+# nice time vg sim --num-reads 1000000 --frag-len 500 --read-length 100 --random-seed 9999 --progress -x ${TRUTH_GAM_GRAPH} --align-out -P HG002#1#JAHKSE010000050.1#0 -P HG002#1#JAHKSE010000058.1#0 -P HG002#1#JAHKSE010000061.1#0 -P hg002#2#JAHKSD010000042.1#0 -P hg002#2#JAHKSD010000425.1#0 -P hg002#2#JAHKSD010000195.1#0 -P hg002#2#JAHKSD010000079.1#0 -P hg002#2#JAHKSD010000133.1#0 -P HG002#1#JAHKSE010000139.1#0 -P HG002#1#JAHKSE010000056.1#0 -P hg002#2#JAHKSD010000015.1#0 >${TRUTH_GAM_BASE}.gam
 
 
 #outdated command that only inlcuded paternal hg002:
