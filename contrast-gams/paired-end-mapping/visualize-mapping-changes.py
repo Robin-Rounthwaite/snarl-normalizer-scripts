@@ -93,6 +93,9 @@ def make_all_svgs(infile, unnormalized_graph_file, normalized_graph_file, unnorm
                     mapping_quality = mapping_end["mapping_quality"] #todo: only include this info if mapping_quality isn't "NA". Or rather, always make mapping quality the value of the one that isn't "NA".
                     correctly_mapped = mapping_end["correctly_mapped"]
                     read_pair_number += 1
+                    print("min is called on: mapping_end['reference_position']", mapping_end["reference_position"])
+                    print("min is called on: mapping_end['path']", mapping_end["path"])
+                    # print("these are the items in the outfile name: ", outfile_base_name + "." + read_name + "." + mapping_key.split("_")[0] + "." + mapping_key.split("_")[1] + "." + "read-pair-" + str(read_pair_number) + "." + "mapping-quality-" + str(mapping_quality) + "." + "correctly-mapped-" + str(correctly_mapped) + "." + "reference-position-" + str(min(mapping_end["reference_position"])) + "-" + str(max(mapping_end["reference_position"])) + "." "node-start-end-" + str(min(mapping_end["path"])) + "-" + str(max(mapping_end["path"])) + ".svg")
                     outfile_name = outfile_base_name + "." + read_name + "." + mapping_key.split("_")[0] + "." + mapping_key.split("_")[1] + "." + "read-pair-" + str(read_pair_number) + "." + "mapping-quality-" + str(mapping_quality) + "." + "correctly-mapped-" + str(correctly_mapped) + "." + "reference-position-" + str(min(mapping_end["reference_position"])) + "-" + str(max(mapping_end["reference_position"])) + "." "node-start-end-" + str(min(mapping_end["path"])) + "-" + str(max(mapping_end["path"])) + ".svg"
 
                     node_list = mapping_end["path"] #TODO: need this to be input format expected by vg find.

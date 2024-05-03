@@ -1,0 +1,53 @@
+nygc-chr19-read-mapping-accuracy-and-mapq-changes.txt
+Data on chr19 read changes:
+
+++ python /home/robin/paten_lab/vg-team/vg/robin-scripts/contrast-gams/paired-end-mapping/aggregate-mappings-by-mapq-and-accuracy.py out-unnorm-norm..parsed-json.txt /home/robin/paten_lab/vg-team/vg/robin-graphs/nygc-chr19/contrast-gams/aggregated_mappings/0
+reading in data
+analyzing line # 0
+finished the analysis. Outputting to file:
+
+Size of saved fields:
+
+dropping_mapq
+	 accurate_to_accurate 880
+	 dropping_accuracy 72
+	 gaining_accuracy 26
+	 inaccurate_to_inaccurate 139
+	 half_accurate_to_half_accurate 150
+
+gaining_mapq
+	 accurate_to_accurate 492
+	 dropping_accuracy 13
+	 gaining_accuracy 66
+	 inaccurate_to_inaccurate 81
+	 half_accurate_to_half_accurate 82
+
+maintaining_high_mapq
+	 dropping_accuracy 17
+	 gaining_accuracy 18
+
+Size of unsaved fields:
+
+maintaining_high_mapq_count
+	 accurate_to_accurate 957097
+	 inaccurate_to_inaccurate 2843
+	 half_accurate_to_half_accurate 1722
+
+maintaining_low_mapq_count
+	 accurate_to_accurate 8645
+	 dropping_accuracy 233
+	 gaining_accuracy 211
+	 inaccurate_to_inaccurate 26153
+	 half_accurate_to_half_accurate 923
+
+avg mapq_loss_in_reads_lose_mapq -18.29879236462797
+loss of mapq >= 60 31
+loss of mapq >= 30 but <60 675
+loss of mapq >= 15 but <30 368
+loss of mapq >= 01 but <15 1485
+
+avg mapq_gains_in_reads_gain_mapq 10.227729885057471
+gains of mapq >= 60 36
+gains of mapq >= 30 but <60 357
+gains of mapq >= 15 but <30 213
+gains of mapq >= 01 but <15 2136

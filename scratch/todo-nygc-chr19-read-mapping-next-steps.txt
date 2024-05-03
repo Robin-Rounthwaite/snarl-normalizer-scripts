@@ -1,0 +1,17 @@
+todo-nygc-chr19-read-mapping-next-steps.txt
+
+Met isabel on the bus. Talked about the origins of ragtime in black american culture.
+
+1)
+On the one hand it would be nice to have those plots again.
+On the other hand, the most important thing is to know which reads are outliers, and study those.
+The best way to do this is to go through the output of some intermediate step of the contrast-gams-pipeline.sh 
+and plot all the reads that change on a manhattan-esque plot, with x label being arbitrary "# of read."
+Then also print the reads that are most interesting, their graph position, 
+and their "numbers" so that we know which ones to look at.
+
+If we're feeling fancy we could even feed those reads directly into the "visualize reads" phase.
+
+2) fix up the bug in visualize-mapping changes as it stands now (it appears to have 
+something to do with trying to make an svg on a read with no mapping position. Filter 
+those out, or simply make an empty svg with a fitting name? Something like that.)

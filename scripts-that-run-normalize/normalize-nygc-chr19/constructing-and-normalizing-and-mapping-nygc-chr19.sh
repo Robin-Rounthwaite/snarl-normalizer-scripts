@@ -2,7 +2,7 @@
 set -ex
 set -o pipefail
 cd /private/groups/patenlab/rrounthw/vg/
-# git checkout master
+git checkout master
 git pull
 . ./source_me.sh && make -j 20
 cd /private/groups/patenlab/rrounthw/nygc/chr19/chr19-from-scratch
@@ -43,7 +43,7 @@ cd /private/groups/patenlab/rrounthw/nygc/chr19/chr19-from-scratch
 # #### normalize
 UNNORM_BASE=nygc.chr19
 SEGREGATED_BASE=${UNNORM_BASE}.segregated-regions
-NORM_BASE=${UNNORM_BASE}.desegregated.normalized
+# NORM_BASE=${UNNORM_BASE}.desegregated.normalized
 NORM_BASE=${UNNORM_BASE}.desegregated.normalized-directly-from-unnorm
 
 INPUT_GBWT=${UNNORM_BASE}.combined.gbwt #gets special treatment because of the ".combined." inclusion.
@@ -55,9 +55,10 @@ INPUT_GBWT=${UNNORM_BASE}.combined.gbwt #gets special treatment because of the "
 # nice time vg gbwt -g ${SEGREGATED_BASE}.gbwt.gg -x ${SEGREGATED_BASE}.pg ${SEGREGATED_BASE}.gbwt
 
 # #normalize the segregated-regions graph.
-nice time -v vg normalize --run_tests -t 20 -G ${INPUT_GBWT} -R ${INPUT_GBWT}.gg -g ${SEGREGATED_BASE}.gbwt -r ${SEGREGATED_BASE}.gbwt.gg -d ${UNNORM_BASE}.dist -S ${SEGREGATED_BASE}.data.txt -o ${NORM_BASE}.gbwt ${SEGREGATED_BASE}.pg > ${NORM_BASE}.pg 2> ${NORM_BASE}.pg.stderr.txt
-#normalize full graph (because maybe this works)
-# nice time -v vg normalize --run_tests -t 20 -G ${INPUT_GBWT} -R ${INPUT_GBWT}.gg -g ${INPUT_GBWT} -r ${INPUT_GBWT}.gg  -d ${UNNORM_BASE}.dist -o ${NORM_BASE}.gbwt ${UNNORM_BASE}.pg > ${NORM_BASE}.pg 2> ${NORM_BASE}.pg.stderr-full-norm.txt
+# nice time -v vg normalize --run_tests -t 20 -G ${INPUT_GBWT} -R ${INPUT_GBWT}.gg -g ${SEGREGATED_BASE}.gbwt -r ${SEGREGATED_BASE}.gbwt.gg -d ${UNNORM_BASE}.dist -S ${SEGREGATED_BASE}.data.txt -o ${NORM_BASE}.gbwt ${SEGREGATED_BASE}.pg > ${NORM_BASE}.pg 2> ${NORM_BASE}.pg.stderr.txt
+
+##normalize full graph (because maybe this works)
+## nice time -v vg normalize --run_tests -t 20 -G ${INPUT_GBWT} -R ${INPUT_GBWT}.gg -g ${INPUT_GBWT} -r ${INPUT_GBWT}.gg  -d ${UNNORM_BASE}.dist -o ${NORM_BASE}.gbwt ${UNNORM_BASE}.pg > ${NORM_BASE}.pg 2> ${NORM_BASE}.pg.stderr-full-norm.txt
 
 
 ####for debuggging:
@@ -72,51 +73,55 @@ nice time -v vg normalize --run_tests -t 20 -G ${INPUT_GBWT} -R ${INPUT_GBWT}.gg
 # nice time vg gbwt -l -x ${UNNORM_BASE}.pg -o ${UNNORM_BASE}.giraffe.gbwt ${INPUT_GBWT}
 # nice time vg gbwt -g ${UNNORM_BASE}.giraffe.gbwt.gg -x ${UNNORM_BASE}.pg ${UNNORM_BASE}.giraffe.gbwt
 
-#norm:
-nice time vg gbwt -l -x ${NORM_BASE}.pg -o ${NORM_BASE}.giraffe.gbwt ${NORM_BASE}.gbwt
-nice time vg gbwt -g ${NORM_BASE}.giraffe.gbwt.gg -x ${NORM_BASE}.pg ${NORM_BASE}.giraffe.gbwt
+# #norm:
+# nice time vg gbwt -l -x ${NORM_BASE}.pg -o ${NORM_BASE}.giraffe.gbwt ${NORM_BASE}.gbwt
+# nice time vg gbwt -g ${NORM_BASE}.giraffe.gbwt.gg -x ${NORM_BASE}.pg ${NORM_BASE}.giraffe.gbwt
 
-##generate normalized .dist
-nice time vg index -j ${NORM_BASE}.dist ${NORM_BASE}.pg
+# ##generate normalized .dist
+# nice time vg index -j ${NORM_BASE}.dist ${NORM_BASE}.pg
 
 # ##generate .min
 # #unnorm:
 # nice time vg minimizer -g ${UNNORM_BASE}.giraffe.gbwt -d ${UNNORM_BASE}.dist -o ${UNNORM_BASE}.min ${UNNORM_BASE}.pg
-#norm:
-nice time vg minimizer -g ${NORM_BASE}.giraffe.gbwt -d ${NORM_BASE}.dist -o ${NORM_BASE}.min ${NORM_BASE}.pg
+# #norm:
+# nice time vg minimizer -g ${NORM_BASE}.giraffe.gbwt -d ${NORM_BASE}.dist -o ${NORM_BASE}.min ${NORM_BASE}.pg
 
 #### simulate reads from hg002 version of the graph.
 #already done in /home/robin/paten_lab/vg-team/vg/robin-scripts/creating-mapping-and-evaluating-sim-reads/creating-hg002-grch38-chr19-graph-and-sim-reads.sh
 
 
 #### making some changes to path names to make the gamcompare possible...
-INPUT_GBWT=${UNNORM_BASE}.combined.gbwt #gets special treatment because of the ".combined." inclusion.
+
+
+
+##todo: figure out if we can safely delete the following: ---------------------------------------
+vg convert -f ${NORM_BASE}.pg > ${NORM_BASE}.gfa
 
 GRAPH_META=grch38-ref.pansn
 
-UNNORM_BASE=nygc.chr19
 UNNORM_GRAPH_BASE=${UNNORM_BASE}.${GRAPH_META}
 UNNORM_GRAPH=${UNNORM_GRAPH_BASE}.pg
-
-NORM_BASE=${UNNORM_BASE}.desegregated.normalized
+NORM_BASE=${UNNORM_BASE}.desegregated.normalized-directly-from-unnorm
 NORM_GRAPH_BASE=${NORM_BASE}.${GRAPH_META}
 NORM_GRAPH=${NORM_GRAPH_BASE}.pg
-
-                #first draft, didn't use:
-                # cp ${UNNORM_BASE}.gfa ${UNNORM_GRAPH_BASE}.gfa
-                # sed 's/chr19/GRCH38#0#chr19/' ${UNNORM_GRAPH_BASE}.gfa
-                # sed 's/H	VN:Z:1.1/H	VN:Z:1.1	RS:Z:GRCH38/' ${UNNORM_GRAPH_BASE}.gfa
+# NORM_GRAPH_BASE=${NORM_BASE}.${GRAPH_META}
+#                 #first draft, didn't use:
+#                 # cp ${UNNORM_BASE}.gfa ${UNNORM_GRAPH_BASE}.gfa
+#                 # sed 's/chr19/GRCH38#0#chr19/' ${UNNORM_GRAPH_BASE}.gfa
+#                 # sed 's/H	VN:Z:1.1/H	VN:Z:1.1	RS:Z:GRCH38/' ${UNNORM_GRAPH_BASE}.gfa
 
 
 # sed 's/chr19/GRCH38#0#chr19/;s/H	VN:Z:1.1/H	VN:Z:1.1	RS:Z:GRCH38/' ${UNNORM_BASE}.gfa > ${UNNORM_GRAPH_BASE}.gfa
 # vg convert -p ${UNNORM_GRAPH_BASE}.gfa > ${UNNORM_GRAPH}
 
-#                 #first draft, didn't use:
-#                 # cp nygc.chr19.gfa ${NORM_GRAPH_BASE}.gfa
-#                 # sed 's/chr19/GRCH38#0#chr19/' ${NORM_GRAPH_BASE}.gfa
-#                 # sed 's/H	VN:Z:1.1/H	VN:Z:1.1	RS:Z:GRCH38/' ${NORM_GRAPH_BASE}.gfa
-# sed 's/chr19/GRCH38#0#chr19/;s/H	VN:Z:1.1/H	VN:Z:1.1	RS:Z:GRCH38/' ${NORM_BASE}.gfa > ${NORM_GRAPH_BASE}.gfa
-# vg convert -p ${NORM_GRAPH_BASE}.gfa > ${NORM_GRAPH}
+# #                 #first draft, didn't use:
+# #                 # cp nygc.chr19.gfa ${NORM_GRAPH_BASE}.gfa
+# #                 # sed 's/chr19/GRCH38#0#chr19/' ${NORM_GRAPH_BASE}.gfa
+# #                 # sed 's/H	VN:Z:1.1/H	VN:Z:1.1	RS:Z:GRCH38/' ${NORM_GRAPH_BASE}.gfa
+
+sed 's/chr19/GRCH38#0#chr19/;s/H	VN:Z:1.1/H	VN:Z:1.1	RS:Z:GRCH38/' ${NORM_BASE}.gfa > ${NORM_GRAPH_BASE}.gfa
+vg convert -p ${NORM_GRAPH_BASE}.gfa > ${NORM_GRAPH}
+##todo end. --------------------------------------------------------------------------------------
 
 # # #### mapping experiment. (from /home/robin/paten_lab/vg-team/vg/robin-scripts/mapping-and-evaluating-sim-reads/giraffe-mapping-and-evaluation-of-sim-reads-on-normalize.sh)
 TRUTH_GAM_BASE=/private/groups/patenlab/rrounthw/nygc/chr19/sim-hg002-reads/sim-1m-reads.chr19-hg002
@@ -140,7 +145,7 @@ UNNORM_GAM=${UNNORM_BASE}.${READ_METADATA}.gam
 # #unnnormalized
 # nice time vg giraffe -m ${UNNORM_BASE}.min -d ${UNNORM_BASE}.dist -g ${UNNORM_BASE}.giraffe.gbwt.gg -H ${UNNORM_BASE}.giraffe.gbwt -i -G ${TRUTH_GAM} -p -t 22 > ${UNNORM_GAM}
 #normalized
-
+echo "nice time vg giraffe -m ${NORM_BASE}.min -d ${NORM_BASE}.dist -g ${NORM_BASE}.giraffe.gbwt.gg -H ${NORM_BASE}.giraffe.gbwt -i -G ${TRUTH_GAM} -p -t 22 > ${NORM_GAM}"
 nice time vg giraffe -m ${NORM_BASE}.min -d ${NORM_BASE}.dist -g ${NORM_BASE}.giraffe.gbwt.gg -H ${NORM_BASE}.giraffe.gbwt -i -G ${TRUTH_GAM} -p -t 22 > ${NORM_GAM}
 
 ##inline function for generating roc stats

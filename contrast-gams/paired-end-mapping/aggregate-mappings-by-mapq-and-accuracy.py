@@ -6,6 +6,13 @@
 import sys
 import ast
 
+#####Examples of reads:
+# ('5a29ed8027e8ab49', {'unnormalized_primary': [{'mapping_quality': 46, 'correctly_mapped': True, 'path': [34508, 34509, 34510, 34511, 34513, 34514, 34517, 34518, 34519, 34520], 'reference_position': []}, {'mapping_quality': 46, 'correctly_mapped': 'NA', 'path': [34564, 34563, 34562, 34561], 'reference_position': []}], 'unnormalized_secondary': [], 'normalized_primary': [{'mapping_quality': 5, 'correctly_mapped': 'NA', 'path': [34584, 34585, 34586, 34587], 'reference_position': []}, {'mapping_quality': 5, 'correctly_mapped': 'NA', 'path': [34600, 34599, 34598, 34597], 'reference_position': []}], 'normalized_secondary': []}), 
+
+# ('c506afae2434341a', {'unnormalized_primary': [{'mapping_quality': 60, 'correctly_mapped': True, 'path': [3331699, 3331698, 3331696, 3331695, 3331694], 'reference_position': []}, {'mapping_quality': 60, 'correctly_mapped': True, 'path': [3331672, 3331673, 3331676, 3331679], 'reference_position': []}], 'unnormalized_secondary': [], 'normalized_primary': [{'mapping_quality': 1, 'correctly_mapped': 'NA', 'path': [2214159, 2214160], 'reference_position': []}, {'mapping_quality': 1, 'correctly_mapped': 'NA', 'path': [2214199, 2214198, 2214197, 2214196], 'reference_position': []}], 'normalized_secondary': []}), 
+
+# ('a5f8da951edca75c', {'unnormalized_primary': [{'mapping_quality': 12, 'correctly_mapped': True, 'path': [2434715, 2434716, 2434718, 2434719, 2434720, 2434722, 2434724, 2434725, 2434727, 2434728, 2434730, 2434731, 2434733, 2434734], 'reference_position': []}, {'mapping_quality': 12, 'correctly_mapped': True, 'path': [2434852, 2434851, 2434849, 2434848, 2434846, 2434844, 2434843, 2434842, 2434840, 2434838, 2434837, 2434835, 2434834, 2434832], 'reference_position': []}], 'unnormalized_secondary': [], 'normalized_primary': [{'mapping_quality': 'NA', 'correctly_mapped': 'NA', 'path': [6724007, 6724006, 6724005, 6724004, 6724002, 6724001, 6723999, 6723998, 6723996, 6723995, 6723993, 6723991, 6723990, 6723988, 6723987, 6723985], 'reference_position': []}, {'mapping_quality': 'NA', 'correctly_mapped': 'NA', 'path': [1843451, 1843452, 1843454, 1843455, 1843457, 1843458, 1843460, 1843461, 1843463, 1843464, 1843465, 1843467, 1843468, 1843470, 1843471, 1843481, 1843482, 1843483], 'reference_position': []}], 'normalized_secondary': []}), 
+
 
 def namestr(obj, namespace):
     return [name for name in namespace if namespace[name] is obj]
@@ -290,6 +297,10 @@ print("finished the analysis. Outputting to file:")
 
 outfile_prefix = sys.argv[2]
 
+#a system for handling "NAs" in the mapping, by replacing them with 0s.
+def remove_na(paired_end):
+    return paired_end if paired_end != "NA" else 0
+
 ### Record analysis
 print()
 print("Size of saved fields:")
@@ -300,12 +311,18 @@ for (dict_name, read_dict) in [("dropping_mapq", dropping_mapq), ("gaining_mapq"
         if dict_name == "gaining_mapq" or dict_name == "maintaining_high_mapq":
             #sort the gaining mapq reads by the higher mapq in the comparison: the normalized reads.
             #(also, arbitrarily, sort the maintaining_high_mapq reads the same way).
-            reads.sort(key = lambda read: (read[1]["normalized_primary"][0]["mapping_quality"] + read[1]["normalized_primary"][1]["mapping_quality"]), reverse=True)
+            reads.sort(key = lambda read: (int(remove_na(read[1]["normalized_primary"][0]["mapping_quality"])) + int(remove_na(read[1]["normalized_primary"][1]["mapping_quality"]))), reverse=True)
             #todo: uncomment (and possibly debug) the following line, which sorts first based on the above criterion, then sorts based on the unnormalized_primary mapqs in counting-up order (i.e. reverse=False for the unnormalized_primary mapq sorting).
             # reads.sort(key = lambda read: (read[1]["normalized_primary"][0]["mapping_quality"] + read[1]["normalized_primary"][1]["mapping_quality"], -(read[1]["unnormalized_primary"][0]["mapping_quality"] + read[1]["unnormalized_primary"][1]["mapping_quality"])), reverse=True)
         else: #dict_name == dropping_mapq:
             #sort the dropping mapq reads by the higher mapq in the comparison: the unnormalized reads.
-            reads.sort(key = lambda read: (read[1]["unnormalized_primary"][0]["mapping_quality"] + read[1]["unnormalized_primary"][1]["mapping_quality"]), reverse=True)
+            # print("reads:", reads)
+            # print("reads:")
+            # for read in reads:
+            #     if read[1]["unnormalized_primary"][0]["mapping_quality"] == "NA" or read[1]["unnormalized_primary"][1]["mapping_quality"] == "NA":
+            #         print(read)
+            
+            reads.sort(key = lambda read: (int(remove_na(read[1]["unnormalized_primary"][0]["mapping_quality"])) + int(remove_na(read[1]["unnormalized_primary"][1]["mapping_quality"]))), reverse=True)
 
         # print("field", field, "reads", reads)
         print("\t", field, len(reads))
