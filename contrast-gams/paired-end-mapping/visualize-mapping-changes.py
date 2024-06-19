@@ -32,8 +32,12 @@ def see_if_too_long(mappings):
     return False
     
 
-def make_all_svgs(infile, unnormalized_graph_file, normalized_graph_file, unnorm_gam_file, norm_gam_file, outfile_base_name, context_size):
+def make_all_svgs(infile, unnormalized_graph_file, normalized_graph_file, unnorm_gam_file, norm_gam_file, outfile_base_name, context_size, max_reads_to_visualize):
+    line_count = 0
     for line in infile:
+        if (line_count==max_reads_to_visualize):
+            return
+        line_count+=1
         read_name = line.split("\t")[0]
         #todo: remove debug
         # if read_name != "seed_12345_fragment_26822":
@@ -75,7 +79,11 @@ def make_all_svgs(infile, unnormalized_graph_file, normalized_graph_file, unnorm
                         mapping_quality = mapping_end["mapping_quality"] #todo: only include this info if mapping_quality isn't "NA". Or rather, always make mapping quality the value of the one that isn't "NA".
                         correctly_mapped = mapping_end["correctly_mapped"]
                         read_pair_number += 1
-                        outfile_name = outfile_base_name + "." + read_name + "." + mapping_key.split("_")[0] + "." + mapping_key.split("_")[1] + "."  + "read-pair-" + str(read_pair_number) + "." + "mapping-quality-" + str(mapping_quality) + "." + "correctly-mapped-" + str(correctly_mapped) + "." + "secondary-read-" + str(secondary_read_number) + "." + "reference-position-" + str(min(mapping_end["reference_position"])) + "-" + str(max(mapping_end["reference_position"])) + "." "node-start-end-" + str(min(mapping_end["path"])) + "-" + str(max(mapping_end["path"])) + ".svg"
+                        min_ref_pos = min(mapping_end["reference_position"]) if len(mapping_end["reference_position"]) != 0 else "NA"
+                        max_ref_pos = max(mapping_end["reference_position"]) if len(mapping_end["reference_position"]) != 0 else "NA"
+                        min_path = min(mapping_end["path"]) if len(mapping_end["path"]) != 0 else "NA"
+                        max_path = max(mapping_end["path"]) if len(mapping_end["path"]) != 0 else "NA"
+                        outfile_name = outfile_base_name + "." + read_name + "." + mapping_key.split("_")[0] + "." + mapping_key.split("_")[1] + "."  + "read-pair-" + str(read_pair_number) + "." + "mapping-quality-" + str(mapping_quality) + "." + "correctly-mapped-" + str(correctly_mapped) + "." + "secondary-read-" + str(secondary_read_number) + "." + "reference-position-" + str(min_ref_pos) + "-" + str(max_ref_pos) + "." "node-start-end-" + str(min_path) + "-" + str(max_path) + ".svg"
 
                         node_list = mapping_end["path"] #TODO: need this to be input format expected by vg find.
 
@@ -93,10 +101,19 @@ def make_all_svgs(infile, unnormalized_graph_file, normalized_graph_file, unnorm
                     mapping_quality = mapping_end["mapping_quality"] #todo: only include this info if mapping_quality isn't "NA". Or rather, always make mapping quality the value of the one that isn't "NA".
                     correctly_mapped = mapping_end["correctly_mapped"]
                     read_pair_number += 1
+
                     print("min is called on: mapping_end['reference_position']", mapping_end["reference_position"])
                     print("min is called on: mapping_end['path']", mapping_end["path"])
+                    min_ref_pos = min(mapping_end["reference_position"]) if len(mapping_end["reference_position"]) != 0 else "NA"
+                    max_ref_pos = max(mapping_end["reference_position"]) if len(mapping_end["reference_position"]) != 0 else "NA"
+                    min_path = min(mapping_end["path"]) if len(mapping_end["path"]) != 0 else "NA"
+                    max_path = max(mapping_end["path"]) if len(mapping_end["path"]) != 0 else "NA"
+
                     # print("these are the items in the outfile name: ", outfile_base_name + "." + read_name + "." + mapping_key.split("_")[0] + "." + mapping_key.split("_")[1] + "." + "read-pair-" + str(read_pair_number) + "." + "mapping-quality-" + str(mapping_quality) + "." + "correctly-mapped-" + str(correctly_mapped) + "." + "reference-position-" + str(min(mapping_end["reference_position"])) + "-" + str(max(mapping_end["reference_position"])) + "." "node-start-end-" + str(min(mapping_end["path"])) + "-" + str(max(mapping_end["path"])) + ".svg")
-                    outfile_name = outfile_base_name + "." + read_name + "." + mapping_key.split("_")[0] + "." + mapping_key.split("_")[1] + "." + "read-pair-" + str(read_pair_number) + "." + "mapping-quality-" + str(mapping_quality) + "." + "correctly-mapped-" + str(correctly_mapped) + "." + "reference-position-" + str(min(mapping_end["reference_position"])) + "-" + str(max(mapping_end["reference_position"])) + "." "node-start-end-" + str(min(mapping_end["path"])) + "-" + str(max(mapping_end["path"])) + ".svg"
+                    # if mapping_end["reference_position"].size() == 0 or mapping_end["path"].size()==0:
+                    #     print("the read doesn't map to ")
+                    # outfile_name = outfile_base_name + "." + read_name + "." + mapping_key.split("_")[0] + "." + mapping_key.split("_")[1] + "." + "read-pair-" + str(read_pair_number) + "." + "mapping-quality-" + str(mapping_quality) + "." + "correctly-mapped-" + str(correctly_mapped) + "." + "reference-position-" + str(min(mapping_end["reference_position"])) + "-" + str(max(mapping_end["reference_position"])) + "." "node-start-end-" + str(min(mapping_end["path"])) + "-" + str(max(mapping_end["path"])) + ".svg"
+                    outfile_name = outfile_base_name + "." + read_name + "." + mapping_key.split("_")[0] + "." + mapping_key.split("_")[1] + "." + "read-pair-" + str(read_pair_number) + "." + "mapping-quality-" + str(mapping_quality) + "." + "correctly-mapped-" + str(correctly_mapped) + "." + "reference-position-" + str(min_ref_pos) + "-" + str(max_ref_pos) + "." "node-start-end-" + str(min_path) + "-" + str(max_path) + ".svg"
 
                     node_list = mapping_end["path"] #TODO: need this to be input format expected by vg find.
                     if mapping_key.split("_")[0] == "unnormalized":
@@ -119,32 +136,36 @@ def make_svg(graph_file, outfile_name, outfile_base_name, read_name, node_list, 
     # print("running vg find: ", vg_find_command)
     vg_find = subprocess.Popen(vg_find_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     vg_find_output = vg_find.communicate()
-    # print("stdout from vg_find_output", vg_find_output[0])
-    # print("stderr from vg_find_output", vg_find_output[1])
-    ## print("debug: stdout (note, program will NOT work with this print uncommented.", vg_find.stdout.read().decode())
+    print("stdout from vg_find_output", vg_find_output[0])
+    print("stderr from vg_find_output", vg_find_output[1])
+    # vg_find_output_duplicate = vg_find_output[:] # doesn't seem to work.
+    # print("decoded stdout: ", vg_find_output_duplicate.stdout.read().decode())
+    # print("decoded stderr: ", vg_find.stderr.read().decode())
+
+    # print("debug: stdout (note, program will NOT work with this print uncommented.", vg_find.stdout.read().decode())
     # print("stderr: ", vg_find.stderr.read().decode())
 
-    # print("gam file is ", gam_file)
+    print("gam file is ", gam_file)
     vg_filter_command = ["vg", "filter", "-n", read_name + "_", gam_file]
-    # print("running vg_filter", vg_filter_command)
+    print("running vg_filter", vg_filter_command)
     # vg_filter = subprocess.Popen(vg_filter_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     vg_filter_tmp_file = outfile_base_name + "." "visualize-mapping-changes." + str(tmp_file_randint) + ".vg-filter-tmp.txt"
     with open(vg_filter_tmp_file, "w") as vg_filter_tmp_inf:
         vg_filter = subprocess.Popen(vg_filter_command, stdout=vg_filter_tmp_inf, stderr=subprocess.PIPE)
         vg_filter_output = vg_filter.communicate()
-        # print("stdout from vg_filter_output", vg_filter_output[0])
-    # print("stderr from vg_filter_output", vg_filter_output[1])
+        print("stdout from vg_filter_output", vg_filter_output[0])
+        print("stderr from vg_filter_output", vg_filter_output[1])
     # print(vg_filter_output)
 
     # print()
 
     # vg_view_command = ["vg", "view", "-dp", "-"]
     vg_view_command = ["vg", "view", "-A", vg_filter_tmp_file, "-dp", "-"]
-    # print("running vg view: ", vg_view_command)
+    print("running vg view: ", vg_view_command)
     vg_view = subprocess.Popen(vg_view_command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     vg_view_output = vg_view.communicate(vg_find_output[0])
-    # print("stdout from vg_view_output", vg_view_output[0])
-    # print("stderr from vg_view_output", vg_view_output[1])
+    print("stdout from vg_view_output", vg_view_output[0])
+    print("stderr from vg_view_output", vg_view_output[1])
 
     rm_tmp_file_command = ["rm", vg_filter_tmp_file]
     rm = subprocess.Popen(rm_tmp_file_command)
@@ -252,13 +273,14 @@ def main():
     parser.add_argument("-o", "--outfile_prefix", type=str, help="the base of all the outfile names. Can include directories.")
 
     #optional
-    parser.add_argument("-c", "--context_size", default="4", type=str, help="Dermines the -c option for vg find. I.e., how many steps of context to give the graph viz from the target nodes. Default=4.")
+    parser.add_argument("-c", "--context_size", default=6, type=str, help="Dermines the -c option for vg find. I.e., how many steps of context to give the graph viz from the target nodes. Default=4.")
+    parser.add_argument("-m", "--max_reads_to_visualize", default=10, type=int, help="the maximum number of reads to visualize from the file input in '-a'. Default=10")
 
     args = parser.parse_args()
     
     # with open(sys.argv[1]) as inf:
     with open(args.analyze_mappings) as inf:
-        make_all_svgs(inf, args.unnorm_graph, args.norm_graph, args.unnorm_gam, args.norm_gam, args.outfile_prefix, args.context_size)
+        make_all_svgs(inf, args.unnorm_graph, args.norm_graph, args.unnorm_gam, args.norm_gam, args.outfile_prefix, args.context_size, args.max_reads_to_visualize)
 
 if __name__ == "__main__":
     main()

@@ -13,12 +13,16 @@ import ast
 
 # ('a5f8da951edca75c', {'unnormalized_primary': [{'mapping_quality': 12, 'correctly_mapped': True, 'path': [2434715, 2434716, 2434718, 2434719, 2434720, 2434722, 2434724, 2434725, 2434727, 2434728, 2434730, 2434731, 2434733, 2434734], 'reference_position': []}, {'mapping_quality': 12, 'correctly_mapped': True, 'path': [2434852, 2434851, 2434849, 2434848, 2434846, 2434844, 2434843, 2434842, 2434840, 2434838, 2434837, 2434835, 2434834, 2434832], 'reference_position': []}], 'unnormalized_secondary': [], 'normalized_primary': [{'mapping_quality': 'NA', 'correctly_mapped': 'NA', 'path': [6724007, 6724006, 6724005, 6724004, 6724002, 6724001, 6723999, 6723998, 6723996, 6723995, 6723993, 6723991, 6723990, 6723988, 6723987, 6723985], 'reference_position': []}, {'mapping_quality': 'NA', 'correctly_mapped': 'NA', 'path': [1843451, 1843452, 1843454, 1843455, 1843457, 1843458, 1843460, 1843461, 1843463, 1843464, 1843465, 1843467, 1843468, 1843470, 1843471, 1843481, 1843482, 1843483], 'reference_position': []}], 'normalized_secondary': []}), 
 
+placed_count = 0
 
 def namestr(obj, namespace):
     return [name for name in namespace if namespace[name] is obj]
 
 def place_in_dicts(mapping, high_mapq_threshold, unnorm_accuracy, norm_accuracy, unnorm_mapq, norm_mapq):
+    global placed_count
+    placed = False
     if norm_mapq - unnorm_mapq >= high_mapq_change_threshold:
+        placed = True
         # the mapping is gaining_mapq.
         if norm_accuracy - unnorm_accuracy > 0:
             gaining_mapq["gaining_accuracy"].append(mapping)
@@ -34,6 +38,7 @@ def place_in_dicts(mapping, high_mapq_threshold, unnorm_accuracy, norm_accuracy,
             print("found a bad accuracy field. accuracy fields:", norm_accuracy, unnorm_accuracy, "mapping:", mapping)
 
     elif 0-(norm_mapq - unnorm_mapq) >=high_mapq_change_threshold:
+        placed = True
         # the mapping is dropping_mapq.
         if norm_accuracy - unnorm_accuracy > 0:
             dropping_mapq["gaining_accuracy"].append(mapping)
@@ -50,8 +55,9 @@ def place_in_dicts(mapping, high_mapq_threshold, unnorm_accuracy, norm_accuracy,
 
     else:
         #the mapping is either a maintaining_high_mapq or maintaining_low_mapq mapping.
-        if unnorm_mapq >= high_mapq_threshold and norm_mapq >= high_mapq_threshold:
+        if unnorm_mapq >= high_mapq_threshold or norm_mapq >= high_mapq_threshold: #todo:note: this includes reads that change to reach the threshold of high mapq, or change to leave the threshold for high mapq. So long as it isn't a change big enough to exceed the high_mapq_change_threshold.
         # if norm_mapq - unnorm_mapq > high_mapq_change_threshold:
+            placed = True
             if norm_accuracy - unnorm_accuracy > 0:
                 maintaining_high_mapq["gaining_accuracy"].append(mapping)
             elif norm_accuracy - unnorm_accuracy < 0:
@@ -66,6 +72,7 @@ def place_in_dicts(mapping, high_mapq_threshold, unnorm_accuracy, norm_accuracy,
                 print("found a bad accuracy field. accuracy fields:", norm_accuracy, unnorm_accuracy, "mapping:", mapping)
         # maintaining low mapq:
         if unnorm_mapq < high_mapq_threshold and norm_mapq < high_mapq_threshold:
+            placed = True
         # if norm_mapq - unnorm_mapq > high_mapq_change_threshold:
             if norm_accuracy - unnorm_accuracy > 0:
                 maintaining_low_mapq_count["gaining_accuracy"] += 1
@@ -80,6 +87,11 @@ def place_in_dicts(mapping, high_mapq_threshold, unnorm_accuracy, norm_accuracy,
             else:
                 print("found a bad accuracy field. accuracy fields:", norm_accuracy, unnorm_accuracy, "mapping:", mapping)
     
+    if placed == True:
+        placed_count+=1
+    else:
+        print("we didn't place this read for some reason.", unnorm_mapq, norm_mapq, unnorm_accuracy, norm_accuracy, mapping)
+
     if norm_mapq - unnorm_mapq < 0:
         # we had a read lose mapq overall. Log this information.
         mapq_loss_in_reads_lose_mapq.append(norm_mapq-unnorm_mapq)
@@ -362,6 +374,6 @@ print("gains of mapq >= 30 but <60", gains["gains_30"])
 print("gains of mapq >= 15 but <30", gains["gains_15"])
 print("gains of mapq >= 01 but <15", gains["gains_1"])
 
-
+print("placed_count", placed_count)
 
 

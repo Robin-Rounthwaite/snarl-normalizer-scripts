@@ -3,6 +3,9 @@ set -ex
 set -o pipefail
 cd /private/groups/patenlab/rrounthw/vg/
 git checkout master
+# git remote add upstream https://github.com/vgteam/vg.git
+# git fetch upstream --recurse-submodules && git merge upstream/master && git submodule update --init --recursive && . ./source_me.sh && make -j 12 
+
 git pull
 . ./source_me.sh && make -j 20
 cd /private/groups/patenlab/rrounthw/nygc/chr19/chr19-from-scratch
@@ -94,8 +97,8 @@ INPUT_GBWT=${UNNORM_BASE}.combined.gbwt #gets special treatment because of the "
 
 
 
-##todo: figure out if we can safely delete the following: ---------------------------------------
-vg convert -f ${NORM_BASE}.pg > ${NORM_BASE}.gfa
+##todo: figure out if we can safely delete the following (update: I think you can't. Because you need the convert to gfa, very last sed, and vg convert back to avoid the incompatible namings.): ---------------------------------------
+# vg convert -f ${NORM_BASE}.pg > ${NORM_BASE}.gfa
 
 GRAPH_META=grch38-ref.pansn
 
@@ -119,16 +122,18 @@ NORM_GRAPH=${NORM_GRAPH_BASE}.pg
 # #                 # sed 's/chr19/GRCH38#0#chr19/' ${NORM_GRAPH_BASE}.gfa
 # #                 # sed 's/H	VN:Z:1.1/H	VN:Z:1.1	RS:Z:GRCH38/' ${NORM_GRAPH_BASE}.gfa
 
-sed 's/chr19/GRCH38#0#chr19/;s/H	VN:Z:1.1/H	VN:Z:1.1	RS:Z:GRCH38/' ${NORM_BASE}.gfa > ${NORM_GRAPH_BASE}.gfa
-vg convert -p ${NORM_GRAPH_BASE}.gfa > ${NORM_GRAPH}
+# sed 's/chr19/GRCH38#0#chr19/;s/H	VN:Z:1.1/H	VN:Z:1.1	RS:Z:GRCH38/' ${NORM_BASE}.gfa > ${NORM_GRAPH_BASE}.gfa
+# vg convert -p ${NORM_GRAPH_BASE}.gfa > ${NORM_GRAPH}
 ##todo end. --------------------------------------------------------------------------------------
 
 # # #### mapping experiment. (from /home/robin/paten_lab/vg-team/vg/robin-scripts/mapping-and-evaluating-sim-reads/giraffe-mapping-and-evaluation-of-sim-reads-on-normalize.sh)
-TRUTH_GAM_BASE=/private/groups/patenlab/rrounthw/nygc/chr19/sim-hg002-reads/sim-1m-reads.chr19-hg002
+READ_METADATA=sim-6m-hg002-chr19-reads
+TRUTH_GAM_BASE=/private/groups/patenlab/rrounthw/nygc/chr19/sim-hg002-reads/${READ_METADATA}
 TRUTH_GAM_GRAPH=/private/groups/patenlab/rrounthw/nygc/chr19/sim-hg002-reads/chr19-hg002-graph/chr19-hg002.xg
 
-# nice time vg sim --num-reads 1000000 --frag-len 500 --read-length 100 --random-seed 9999 --progress -x ${TRUTH_GAM_GRAPH} --align-out -P HG002#1#JAHKSE010000050.1#655 -P HG002#1#JAHKSE010000056.1#99 -P HG002#1#JAHKSE010000058.1#16 -P HG002#1#JAHKSE010000061.1#1298003 -P HG002#1#JAHKSE010000139.1#4636 -P hg002#2#JAHKSD010000015.1#1108 -P hg002#2#JAHKSD010000042.1#0 -P hg002#2#JAHKSD010000042.1#29382422 -P hg002#2#JAHKSD010000042.1#52728260 -P hg002#2#JAHKSD010000079.1#0 -P hg002#2#JAHKSD010000133.1#5264 -P hg002#2#JAHKSD010000195.1#6354 -P hg002#2#JAHKSD010000425.1#0 >${TRUTH_GAM_BASE}.gam
-# nice vg annotate -m -x ${TRUTH_GAM_GRAPH} -t 20 -a ${TRUTH_GAM_BASE}.gam > ${TRUTH_GAM_BASE}.annotated.gam
+# we want 50x coverage. So, 50=(500*x)/(59,000,000). Therefore x=5,900,000~=6million
+nice time vg sim --num-reads 6000000 --frag-len 500 --read-length 100 --random-seed 9999 --progress -x ${TRUTH_GAM_GRAPH} --align-out -P HG002#1#JAHKSE010000050.1#655 -P HG002#1#JAHKSE010000056.1#99 -P HG002#1#JAHKSE010000058.1#16 -P HG002#1#JAHKSE010000061.1#1298003 -P HG002#1#JAHKSE010000139.1#4636 -P hg002#2#JAHKSD010000015.1#1108 -P hg002#2#JAHKSD010000042.1#0 -P hg002#2#JAHKSD010000042.1#29382422 -P hg002#2#JAHKSD010000042.1#52728260 -P hg002#2#JAHKSD010000079.1#0 -P hg002#2#JAHKSD010000133.1#5264 -P hg002#2#JAHKSD010000195.1#6354 -P hg002#2#JAHKSD010000425.1#0 >${TRUTH_GAM_BASE}.gam
+nice vg annotate -m -x ${TRUTH_GAM_GRAPH} -t 20 -a ${TRUTH_GAM_BASE}.gam > ${TRUTH_GAM_BASE}.annotated.gam
 TRUTH_GAM=${TRUTH_GAM_BASE}.annotated.gam
 
 #                     #NOTE: the following sim command was used on an old version of the graph with weird stuff like name "chr19" -> "chr19#0" in gfa edits. called "chr19-hg002.added-pound-sign-to-ref.pg". It didn't work. I'm using a different graph now. 
@@ -136,17 +141,16 @@ TRUTH_GAM=${TRUTH_GAM_BASE}.annotated.gam
 #                     # nice time vg sim --num-reads 1000000 --frag-len 500 --read-length 100 --random-seed 9999 --progress -x ${TRUTH_GAM_GRAPH} --align-out -P HG002#1#JAHKSE010000050.1#0 -P HG002#1#JAHKSE010000058.1#0 -P HG002#1#JAHKSE010000061.1#0 -P hg002#2#JAHKSD010000042.1#0 -P hg002#2#JAHKSD010000425.1#0 -P hg002#2#JAHKSD010000195.1#0 -P hg002#2#JAHKSD010000079.1#0 -P hg002#2#JAHKSD010000133.1#0 -P HG002#1#JAHKSE010000139.1#0 -P HG002#1#JAHKSE010000056.1#0 -P hg002#2#JAHKSD010000015.1#0 >${TRUTH_GAM_BASE}.gam
 
 
-READ_METADATA=1m-hg002-chr19-reads
 # # READ_METADATA=1m-hg002-chr19-reads.updated-chr19-to-pansn-naming #todo: never used. Do I need to update the gam after pansn naming?
 NORM_GAM=${NORM_BASE}.${READ_METADATA}.gam
 UNNORM_GAM=${UNNORM_BASE}.${READ_METADATA}.gam
 
 # ##run giraffe
 # #unnnormalized
-# nice time vg giraffe -m ${UNNORM_BASE}.min -d ${UNNORM_BASE}.dist -g ${UNNORM_BASE}.giraffe.gbwt.gg -H ${UNNORM_BASE}.giraffe.gbwt -i -G ${TRUTH_GAM} -p -t 22 > ${UNNORM_GAM}
+nice time vg giraffe -M 8 -m ${UNNORM_BASE}.min -d ${UNNORM_BASE}.dist -g ${UNNORM_BASE}.giraffe.gbwt.gg -H ${UNNORM_BASE}.giraffe.gbwt -i -G ${TRUTH_GAM} -p -t 22 > ${UNNORM_GAM}
 #normalized
-echo "nice time vg giraffe -m ${NORM_BASE}.min -d ${NORM_BASE}.dist -g ${NORM_BASE}.giraffe.gbwt.gg -H ${NORM_BASE}.giraffe.gbwt -i -G ${TRUTH_GAM} -p -t 22 > ${NORM_GAM}"
-nice time vg giraffe -m ${NORM_BASE}.min -d ${NORM_BASE}.dist -g ${NORM_BASE}.giraffe.gbwt.gg -H ${NORM_BASE}.giraffe.gbwt -i -G ${TRUTH_GAM} -p -t 22 > ${NORM_GAM}
+echo "nice time vg giraffe -M 8 -m ${NORM_BASE}.min -d ${NORM_BASE}.dist -g ${NORM_BASE}.giraffe.gbwt.gg -H ${NORM_BASE}.giraffe.gbwt -i -G ${TRUTH_GAM} -p -t 22 > ${NORM_GAM}"
+nice time vg giraffe -M 8 -m ${NORM_BASE}.min -d ${NORM_BASE}.dist -g ${NORM_BASE}.giraffe.gbwt.gg -H ${NORM_BASE}.giraffe.gbwt -i -G ${TRUTH_GAM} -p -t 22 > ${NORM_GAM}
 
 ##inline function for generating roc stats
 get_roc_stats () {
@@ -182,7 +186,7 @@ get_roc_stats () {
 
 #start to make summary stats
 # KEYWORD=${UNNORM_BASE}.hg002
-KEYWORD=${UNNORM_BASE}.hg002.${GRAPH_META}
+KEYWORD=${UNNORM_BASE}.${READ_METADATA}.${GRAPH_META}
 REPORT=report.${KEYWORD}.tsv
 ROC_STATS=roc_stats.${KEYWORD}.tsv
 cat /dev/null > ${REPORT}
