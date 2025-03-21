@@ -1,0 +1,172 @@
+# turns out there was a problem with previous normalization/mapping jobs. I was somehow using the giraffe gbwt still! Which was pruned! Resulting in invalid normalizations. That's fixed in this file.
+# (kubectl delete job robin-giraffe-nygc-chr21 || true) && kubectl apply -f - <<'EOF'
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: robin-giraffe-full-jean-graph
+spec:
+  ttlSecondsAfterFinished: 345600
+  template:
+    spec:
+      containers:
+      - name: robin-giraffe
+        imagePullPolicy: Always
+        image: quay.io/vgteam/vg:v1.48.0
+        command:
+        - /bin/bash
+        - -c
+        - |
+          # ## Make my VG from scratch:
+          set -e
+          DEBIAN_FRONTEND=noninteractive apt-get update -qq -y && DEBIAN_FRONTEND=noninteractive apt-get install -qq -y build-essential git cmake sudo pkg-config libseqan2-dev zip curl
+          
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+          
+          # echo "install vg"
+          # git clone --recursive https://github.com/Robin-Rounthwaite/vg.git
+          # cd vg
+          # git log -1
+          # echo "before make"
+          # make get-deps
+          # . ./source_me.sh && make
+
+          ## Perform experiment        
+          set -ex
+          export VG_FULL_TRACEBACK=1
+
+          OUTPUT_DIR=s3://vg-k8s/users/rrounthw/normalize_snarls/jean-hg38-hsvlr_srdedup17_aug/full-genome-mapping/
+          FILE_BASE=http://courtyard.gi.ucsc.edu/~rrounthw/jean-combined-sv-graph
+
+          ##get reads:
+          wget ${FILE_BASE}/hg38-hsvlr_srdedup17_aug.robin-giraffe-29k11w32N-fast.gam -o reads.gam
+
+          cd /tmp
+          printf "graph\tgbwt\treads\tpairing\tspeed\tcorrect\tmapq60\twrong_mapq60\tidentity\tscore\n" > report.tsv
+          printf "correct\tmq\tscore\taligner\n" > roc_stats.tsv
+          for SPECIES in human ; do
+              case "${SPECIES}" in
+              human)
+                  GRAPHS=(hg38-hsvlr_srdedup17_aug_unnormalized hg38-hsvlr_srdedup17_aug_normalized)
+                  READSETS=(custom)
+                  ;;
+              esac
+              
+              for GRAPH in ${GRAPHS[@]} ; do
+                  for READS in ${READSETS[@]} ; do
+                      case ${GRAPH} in
+                      jean_graph_unnorm)
+                          wget ${FILE_BASE}/hg38-hsvlr_srdedup17_aug.new.dist -o graph.dist
+                          wget ${FILE_BASE}/hg38-hsvlr_srdedup17_aug.k29.w11.min -o graph.min
+                          wget ${FILE_BASE}/hg38-hsvlr_srdedup17_aug.N32.gbwt -o graph.gbwt
+                          wget ${FILE_BASE}/hg38-hsvlr_srdedup17_aug.xg -o graph.xg
+
+                          vg gbwt -x graph.xg -o graph.giraffe.gbwt -l graph.gbwt
+                          vg gbwt -g graph.giraffe.gbz --gbz-format -x graph.xg graph.giraffe.gbwt
+                          ;;
+
+                      jean_graph_norm)
+                          wget ${FILE_BASE}/hg38-hsvlr_srdedup17_aug.normalized.dist -o graph.dist
+                          wget ${FILE_BASE}/hg38-hsvlr_srdedup17_aug.normalized.k29.w11.min -o graph.min
+                          wget ${FILE_BASE}/hg38-hsvlr_srdedup17_aug.normalized.gbwt -o graph.gbwt
+                          wget ${FILE_BASE}/hg38-hsvlr_srdedup17_aug.normalized.xg -o graph.xg
+
+                          vg gbwt -x graph.xg -o graph.giraffe.gbwt -l graph.gbwt
+                          vg gbwt -g graph.giraffe.gbz --gbz-format -x graph.xg graph.giraffe.gbwt
+                          ;;
+
+                          fi
+                          for PARAM_PRESET in default fast ; do
+                              for PAIRING in paired ; do 
+                                  if [[ ${PAIRING} == "paired" ]] ; then
+                                      PAIRED="-i"
+                                  elif [[ ${PAIRING} == "single" ]] ; then 
+                                      PAIRED=""
+                                  fi
+                                  ls -alt
+                                  time vg giraffe -x graph.xg -H graph.giraffe.gbwt -g graph.gg -m graph.min -d graph.dist -G reads.gam -b ${PARAM_PRESET} ${PAIRED} -t 22 > mapped.gam 
+                                  ls -alt
+                                  rm graph.giraffe.gbz
+                                  ls -alt
+
+                                  aws s3 cp mapped.gam ${OUTPUT_DIR}/mapped_reads.${GRAPH}.${PARAM_PRESET}.${PAIRING}.gam
+
+                                  vg gamcompare -r   100 -s <(vg annotate -m -x graph.xg -a mapped.gam) reads.gam 2>count | vg view -aj - > compared.json
+                                  CORRECT_COUNT="$(sed -n '1p' count | sed 's/[^0-9]//g')"
+                                  SCORE="$(sed -n '2p' count | sed 's/[^0-9\.]//g')"
+                                  MAPQ="$(grep mapping_quality\":\ 60 compared.json | wc -l)"
+                                  MAPQ60="$(grep -v correctly_mapped compared.json | grep mapping_quality\":\ 60 | wc -l)"
+                                  IDENTITY="$(jq '.identity' compared.json | awk '{sum+=$1} END {print sum/NR}')"
+                                  echo ${GRAPH} ${GBWT} ${READS} ${PARAM_PRESET}${PAIRING} ${SPEED} ${CORRECT_COUNT} ${MAPQ} ${MAPQ60} ${IDENTITY} ${SCORE}
+                                  printf "${GRAPH}\t${GBWT}\t${READS}\t${PARAM_PRESET}\t${PAIRING}\t${SPEED}\t${CORRECT_COUNT}\t${MAPQ}\t${MAPQ60}\t${IDENTITY}\t${SCORE}\n" >> report.tsv
+                                  jq -r '(if .correctly_mapped then 1 else 0 end|tostring) + "," + (.mapping_quality|tostring) + "," + (.score|tostring)' compared.json | sed 's/,/\t/g' | sed "s/$/\tgiraffe_${PARAM_PRESET}_${GRAPH}${GBWT}${READS}${PAIRING}/" >> roc_stats.tsv
+                              done
+                          done
+                      done
+                  done
+              done
+          done
+          sed -i 's/single//g ; s/paired/-pe/g ; s/null/0/g' roc_stats.tsv
+          gzip roc_stats.tsv
+          aws s3 cp report.tsv ${OUTPUT_DIR}/report_giraffe.${OUTPUT_META}.txt
+          aws s3 cp roc_stats.tsv.gz ${OUTPUT_DIR}/roc_stats_giraffe.${OUTPUT_META}.tsv.gz
+        volumeMounts:
+        - mountPath: /tmp
+          name: scratch-volume
+        - mountPath: /root/.aws
+          name: s3-credentials
+        resources:
+          requests:
+            cpu: "24"
+            memory: "120Gi"
+            ephemeral-storage: "150Gi"
+          limits:
+            cpu: "24"
+            memory: "120Gi"
+            ephemeral-storage: "150Gi"
+      restartPolicy: Never
+      volumes:
+      - name: scratch-volume
+        emptyDir: {}
+      - name: s3-credentials
+        secret:
+          secretName: shared-s3-credentials
+  backoffLimit: 0
+# EOF
+
+
+              # if [[${build_index}==("NYGC_sim_index")]] ; then
+              #     for GRAPH in ${GRAPHS[@]} ; do
+              #         case ${GRAPH} in
+              #         nygc_chr21_unnorm)
+              #             GRAPH_BASE=s3://vg-k8s/users/rrounthw/normalize_snarls/nygc_snp1kg_grch38_ref/chr21-giraffe-sim-gbwt/nygc_snp1kg_grch38.rrounthw-made.chr21
+              #             aws s3 cp ${GRAPH_BASE}.xg graph.xg
+
+              #         nygc_chr21_norm)
+              #             GRAPH_BASE=s3://vg-k8s/users/rrounthw/normalize_snarls/nygc_snp1kg_grch38_ref/chr21-giraffe-sim-gbwt/nygc_snp1kg_grch38.rrounthw-made.chr21.normalized.standard-gbwt
+              #             aws s3 cp ${GRAPH_BASE}.xg graph.xg
+              #             ##first, chop normalized graph for indexing.
+              #             vg convert -v graph.xg > graph.vg 
+              #             vg mod -X 1024 graph.vg > graph.chopped.vg
+              #             vg convert -x graph.chopped.vg > graph.xg #chopped is the new xg we'll work with.
+              #             GRAPH_BASE=s3://vg-k8s/users/rrounthw/normalize_snarls/nygc_snp1kg_grch38_ref/chr21-giraffe-sim-gbwt/nygc_snp1kg_grch38.rrounthw-made.chr21.normalized.standard-gbwt.chunked
+              #             aws s3 cp graph.chopped.xg ${GRAPH_BASE}.xg
+              #         esac 
+
+              #     vg snarls -T graph.xg > graph.snarls.pb
+              #     aws s3 cp graph.snarls.pb ${GRAPH_BASE}.snarls.pb
+
+              #     vg index -s graph.snarls.pb -j graph.dist graph.xg
+              #     aws s3 cp graph.dist ${GRAPH_BASE}.dist
+                  
+              #     vg gbwt -P -x graph.xg -o graph.path-cover.gbwt
+              #     aws s3 cp graph.path-cover.gbwt ${GRAPH_BASE}.path-cover.gbwt
+                  
+              #     vg gbwt -g graph.path-cover.gg -x graph.xg graph.path-cover.gbwt
+              #     aws s3 cp graph.path-cover.gg ${GRAPH_BASE}.path-cover.gg
+                  
+              #     vg minimizer -g graph.path-cover.gbwt -d graph.dist -o graph.min -G graph.gg 
+              #     aws s3 cp graph.path-cover.min ${GRAPH_BASE}.path-cover.min
+              #     done
+              # fi
